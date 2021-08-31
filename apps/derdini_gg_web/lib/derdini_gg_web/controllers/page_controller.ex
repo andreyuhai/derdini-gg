@@ -1,5 +1,6 @@
 defmodule DerdiniGGWeb.PageController do
   use DerdiniGGWeb, :controller
+
   alias DerdiniGGWeb.Authentication
 
   def index(conn, _params) do

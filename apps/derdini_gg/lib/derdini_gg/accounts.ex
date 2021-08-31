@@ -4,8 +4,8 @@ defmodule DerdiniGG.Accounts do
   """
 
   import Ecto.Query, warn: false
-  alias DerdiniGG.Repo
 
+  alias DerdiniGG.Repo
   alias DerdiniGG.Accounts.Account
 
   @doc """

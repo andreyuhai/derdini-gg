@@ -1,5 +1,6 @@
 defmodule DerdiniGGWeb.Authentication do
   use Guardian, otp_app: :derdini_gg
+
   alias DerdiniGG.{Accounts, Accounts.Account}
 
   def subject_for_token(resource, _claims) do
