@@ -1,5 +1,8 @@
 defmodule DerdiniGGWeb.RegistrationController do
   use DerdiniGGWeb, :controller
+  alias DerdiniGG.Accounts
+  alias DerdiniGGWeb.Authentication
+  plug Ueberauth
 
   def new(conn, _) do
     render(conn, :new, changeset: conn, action: "/register")
