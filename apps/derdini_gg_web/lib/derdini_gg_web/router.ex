@@ -1,6 +1,14 @@
 defmodule DerdiniGGWeb.Router do
   use DerdiniGGWeb, :router
 
+  pipeline :browser_auth do
+    plug Guardian.Plug.EnsureAuthenticated
+  end
+
+  pipeline :guardian do
+    plug DerdiniGGWeb.Authentication.Pipeline
+  end
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
