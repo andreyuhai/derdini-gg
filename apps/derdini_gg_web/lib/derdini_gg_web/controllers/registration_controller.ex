@@ -5,7 +5,10 @@ defmodule DerdiniGGWeb.RegistrationController do
   plug Ueberauth
 
   def new(conn, _) do
-    render(conn, :new, changeset: conn, action: "/register")
+    render(conn, :new,
+      changeset: Accounts.change_account(),
+      action: Routes.registration_path(conn, :create)
+    )
   end
 
   def create(%{assigns: %{uberauth_auth: auth_params}} = conn, _params) do
