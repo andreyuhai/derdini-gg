@@ -22,10 +22,17 @@ defmodule DerdiniGGWeb.Router do
   end
 
   scope "/", DerdiniGGWeb do
-    pipe_through :browser
+    pipe_through [:browser, :guardian]
 
-    get "/", PageController, :index
+    scope "/" do
+      pipe_through :browser_auth
+
+      get "/", PageController, :index
+    end
+
     get "/register", RegistrationController, :new
+    post "/register", RegistrationController, :create
+
     get "/login", SessionController, :new
   end
 
