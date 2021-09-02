@@ -104,9 +104,9 @@ defmodule DerdiniGG.Accounts do
     Account.changeset(account, %{})
   end
 
-  def register(%Ueberauth.Auth{} = params) do
+  def register(params) do
     %Account{}
-    |> Account.changeset(extract_account_params(params))
+    |> Account.changeset(params)
     |> Repo.insert()
   end
 
