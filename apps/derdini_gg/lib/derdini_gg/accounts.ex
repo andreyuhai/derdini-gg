@@ -109,4 +109,8 @@ defmodule DerdiniGG.Accounts do
     |> Account.changeset(params)
     |> Repo.insert()
   end
+
+  def get_by_email(email) do
+    Repo.get_by(Account, email: email)
+  end
 end
