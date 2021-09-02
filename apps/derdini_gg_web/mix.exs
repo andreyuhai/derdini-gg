@@ -49,9 +49,7 @@ defmodule DerdiniGGWeb.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:guardian, "~> 2.2"},
-      {:argon2_elixir, "~> 2.4"},
-      {:ueberauth, "~> 0.7.0"},
-      {:ueberauth_identity, "~> 0.4.0"}
+      {:argon2_elixir, "~> 2.4"}
     ]
   end
 

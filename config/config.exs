@@ -35,17 +35,6 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
-# Ueberauth config
-config :ueberauth, Ueberauth,
-  providers: [
-    identity: {Ueberauth.Strategy.Identity, [
-      param_nesting: "account",
-      request_path: "/register",
-      callback_path: "/register",
-      callback_methods: ["POST"]
-    ]}
-  ]
-
 # Guardian config
 config :derdini_gg, DerdiniGGWeb.Authentication,
   issuer: "derdini_gg",
