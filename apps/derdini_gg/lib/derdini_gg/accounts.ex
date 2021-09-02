@@ -109,10 +109,4 @@ defmodule DerdiniGG.Accounts do
     |> Account.changeset(params)
     |> Repo.insert()
   end
-
-  defp extract_account_params(%{credentials: %{other: other}, info: info}) do
-    info
-    |> Map.from_struct()
-    |> Map.merge(other)
-  end
 end
