@@ -21,7 +21,31 @@ defmodule DerdiniGGWeb.Authentication do
     __MODULE__.Plug.sign_in(conn, account)
   end
 
+  def log_out(conn) do
+    __MODULE__.Plug.sign_out(conn)
+  end
+
   def get_current_account(conn) do
     __MODULE__.Plug.current_resource(conn)
+  end
+
+  def authenticate(%Account{} = account, password) do
+    authenticate(
+      account,
+      password,
+      Argon2.verify_pass(password, account.encrypted_password)
+    )
+  end
+
+  def authenticate(nil, password) do
+    authenticate(nil, password, Argon2.no_user_verify())
+  end
+
+  defp authenticate(account, _password, true) do
+    {:ok, account}
+  end
+
+  defp authenticate(_account, _password, false) do
+    {:error, :invalid_credentials}
   end
 end
