@@ -16,7 +16,7 @@ defmodule DerdiniGG.AccountsTest do
 
   test "register for an account with an existing email address" do
     params = valid_account_params()
-    Repo.insert!(%Account{email: params.info.email})
+    Repo.insert!(%Account{email: params.email})
 
     pre_count = count_of(Account)
 
@@ -28,17 +28,11 @@ defmodule DerdiniGG.AccountsTest do
 
   test "register for an account without matching password and confirmation" do
     pre_count = count_of(Account)
-    %{credentials: credentials} = params = valid_account_params()
+    params = valid_account_params()
 
     params = %{
       params
-      | credentials: %{
-        credentials
-        | other: %{
-          password: "superdupersecret",
-          password_confirmation: "somethingelse"
-        }
-      }
+      | password_confirmation: "non-matching-password"
     }
 
     result = Accounts.register(params)
@@ -52,16 +46,10 @@ defmodule DerdiniGG.AccountsTest do
   end
 
   defp valid_account_params do
-    %Ueberauth.Auth{
-      credentials: %Ueberauth.Auth.Credentials{
-        other: %{
-          password: "superdupersecret",
-          password_confirmation: "superdupersecret"
-        }
-      },
-      info: %Ueberauth.Auth.Info{
-        email: "me@example.com"
-      }
+    %{
+      email: "john@doe.com",
+      password: "superdupersecret",
+      password_confirmation: "superdupersecret"
     }
   end
 end
