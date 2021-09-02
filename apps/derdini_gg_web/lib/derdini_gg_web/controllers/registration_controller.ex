@@ -11,8 +11,8 @@ defmodule DerdiniGGWeb.RegistrationController do
     )
   end
 
-  def create(conn, _params) do
-    case Accounts.register(auth_params) do
+  def create(conn, %{"account" => account_params}) do
+    case Accounts.register(account_params) do
       {:ok, account} ->
         conn
         |> Authentication.log_in(account)
