@@ -1,7 +1,34 @@
 defmodule DerdiniGGWeb.SessionController do
   use DerdiniGGWeb, :controller
 
+  alias DerdiniGG.Accounts
+  alias DerdiniGGWeb.Authentication
+
   def new(conn, _) do
-    render(conn, :new, changeset: conn, action: "/login")
+    render(
+      conn, :new,
+      changeset: Accounts.change_account(),
+      action: Routes.session_path(conn, :create)
+    )
+  end
+
+  def create(conn, %{"account" => %{"email" => email, "password" => password}}) do
+    case email |> Accounts.get_by_email() |> Authentication.authenticate(password) do
+      {:ok, account} ->
+        conn
+        |> Authentication.log_in(account)
+        |> redirect(to: Routes.page_path(conn, :index))
+
+      {:error, :invalid_credentials} ->
+        conn
+        |> put_flash(:error, "Incorrect email or password")
+        |> new(%{})
+    end
+  end
+
+  def delete(conn, _params) do
+    conn
+    |> Authentication.log_out()
+    |> redirect(to: Routes.session_path(conn, :new))
   end
 end
