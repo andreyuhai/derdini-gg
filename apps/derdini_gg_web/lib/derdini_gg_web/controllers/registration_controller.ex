@@ -5,10 +5,14 @@ defmodule DerdiniGGWeb.RegistrationController do
   alias DerdiniGGWeb.Authentication
 
   def new(conn, _) do
-    render(conn, :new,
-      changeset: Accounts.change_account(),
-      action: Routes.registration_path(conn, :create)
-    )
+    if Authentication.get_current_account(conn) do
+      redirect(conn, to: Routes.page_path(conn, :index))
+    else
+      render(conn, :new,
+        changeset: Accounts.change_account(),
+        action: Routes.registration_path(conn, :create)
+      )
+    end
   end
 
   def create(conn, %{"account" => account_params}) do
