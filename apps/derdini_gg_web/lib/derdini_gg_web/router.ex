@@ -21,6 +21,13 @@ defmodule DerdiniGGWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :api_auth do
+    plug Guardian.Plug.Pipeline, module: DerdiniGGWeb.Authentication
+    plug Guardian.Plug.VerifyHeader
+    plug Guardian.Plug.LoadResource, allow_blank: true
+    plug Guardian.Plug.EnsureAuthenticated
+  end
+
   scope "/", DerdiniGGWeb do
     pipe_through [:browser, :guardian]
 
