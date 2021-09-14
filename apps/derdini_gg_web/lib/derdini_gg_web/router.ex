@@ -31,11 +31,14 @@ defmodule DerdiniGGWeb.Router do
       delete "/logout", SessionController, :delete
     end
 
-    get "/register", RegistrationController, :new
-    post "/register", RegistrationController, :create
+    resources "/register", RegistrationController, only: [:new, :create]
+    resources "/login", SessionController, only: [:new, :create]
+  end
 
-    get "/login", SessionController, :new
-    post "/login", SessionController, :create
+  scope "/", DerdiniGGWeb do
+    pipe_through [:api, :api_auth]
+
+    resources "/derts", PageApiController, only: [:index]
   end
 
   # Other scopes may use custom stacks.
