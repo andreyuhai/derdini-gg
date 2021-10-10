@@ -19,12 +19,12 @@ defmodule DerdiniGGWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
-  end
-
-  pipeline :api_auth do
     plug Guardian.Plug.Pipeline, module: DerdiniGGWeb.Authentication
     plug Guardian.Plug.VerifyHeader
     plug Guardian.Plug.LoadResource, allow_blank: true
+  end
+
+  pipeline :api_auth do
     plug Guardian.Plug.EnsureAuthenticated
   end
 
@@ -38,14 +38,17 @@ defmodule DerdiniGGWeb.Router do
       delete "/logout", SessionController, :delete
     end
 
-    resources "/register", RegistrationController, only: [:new, :create]
-    resources "/login", SessionController, only: [:new, :create]
+    get "/register", RegistrationController, :new
+    post "/register", RegistrationController, :create
+
+    get "/login", SessionController, :new
+    post "/login", SessionController, :create
   end
 
-  scope "/", DerdiniGGWeb do
+  scope "/", DerdiniGGWeb.Api do
     pipe_through [:api, :api_auth]
 
-    resources "/derts", PageApiController, only: [:index]
+    resources "/derts", PageController, only: [:index]
   end
 
   # Other scopes may use custom stacks.
