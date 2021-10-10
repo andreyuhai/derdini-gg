@@ -1,27 +1,22 @@
 defmodule DerdiniGGWeb.Router do
   use DerdiniGGWeb, :router
 
-  pipeline :browser_auth do
-    plug Guardian.Plug.EnsureAuthenticated
-  end
-
-  pipeline :guardian do
-    plug DerdiniGGWeb.Authentication.Pipeline
-  end
-
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug DerdiniGGWeb.Authentication.Browser.Pipeline
+  end
+
+  pipeline :browser_auth do
+    plug Guardian.Plug.EnsureAuthenticated
   end
 
   pipeline :api do
     plug :accepts, ["json"]
-    plug Guardian.Plug.Pipeline, module: DerdiniGGWeb.Authentication
-    plug Guardian.Plug.VerifyHeader
-    plug Guardian.Plug.LoadResource, allow_blank: true
+    plug DerdiniGGWeb.Authentication.Api.Pipeline
   end
 
   pipeline :api_auth do
@@ -29,7 +24,7 @@ defmodule DerdiniGGWeb.Router do
   end
 
   scope "/", DerdiniGGWeb do
-    pipe_through [:browser, :guardian]
+    pipe_through :browser
 
     scope "/" do
       pipe_through :browser_auth
@@ -46,9 +41,14 @@ defmodule DerdiniGGWeb.Router do
   end
 
   scope "/", DerdiniGGWeb.Api do
-    pipe_through [:api, :api_auth]
+    pipe_through :api
 
-    resources "/derts", PageController, only: [:index]
+    scope "/" do
+      pipe_through :api_auth
+
+      resources "/derts", PageController, only: [:index]
+      get "/auth", AuthController, :index
+    end
   end
 
   # Other scopes may use custom stacks.
