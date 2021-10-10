@@ -1,4 +1,4 @@
-defmodule DerdiniGGWeb.PageApiController do
+defmodule DerdiniGGWeb.Api.PageController do
   use DerdiniGGWeb, :controller
 
   def index(conn, _) do
