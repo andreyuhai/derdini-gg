@@ -19,9 +19,12 @@ defmodule DerdiniGGWeb.SessionController do
   def create(conn, %{"account" => %{"email" => email, "password" => password}}) do
     case email |> Accounts.get_by_email() |> Authentication.authenticate(password) do
       {:ok, account} ->
+        {:ok, jwt_for_extension, _} =
+          Authentication.encode_and_sign(account)
+
         conn
         |> Authentication.log_in(account)
-        |> redirect(to: Routes.page_path(conn, :index))
+        |> redirect(to: Routes.page_path(conn, :index, token: jwt_for_extension))
 
       {:error, :invalid_credentials} ->
         conn
