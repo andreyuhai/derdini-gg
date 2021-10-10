@@ -4,7 +4,10 @@ defmodule DerdiniGGWeb.PageController do
   alias DerdiniGGWeb.Authentication
 
   def index(conn, _params) do
-    current_account = Authentication.get_current_account(conn)
-    render(conn, :index, current_account: current_account)
+    with account <- Authentication.get_current_account(conn) do
+      conn
+      |> assign(:current_account, account)
+      |> render(:index)
+    end
   end
 end
