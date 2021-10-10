@@ -3,3 +3,7 @@ alias DerdiniGG.{
   Accounts.Account,
   Repo
 }
+
+alias DerdiniGGWeb.{
+  Authentication
+}
