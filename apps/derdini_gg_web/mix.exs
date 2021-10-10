@@ -37,6 +37,7 @@ defmodule DerdiniGGWeb.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:corsica, "~> 1.1"},
       {:phoenix, "~> 1.5.11"},
       {:phoenix_ecto, "~> 4.4"},
       {:phoenix_html, "~> 2.11"},
