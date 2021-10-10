@@ -1,6 +1,6 @@
 ### TODOs for Web
 
-- [ ] Send a JWT after session creation to the front-end which will send it to the Chrome extension.
+- [x] Send a JWT after session creation to the front-end which will send it to the Chrome extension.
 - [ ] Create JSON endpoints for new entries.
 - [ ] Create a UI for viewing inserted "dert"s.
 
