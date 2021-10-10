@@ -1,4 +1,4 @@
-defmodule DerdiniGGWeb.Authentication.ErrorHandler do
+defmodule DerdiniGGWeb.Authentication.Browser.ErrorHandler do
   use DerdiniGGWeb, :controller
 
   @behaviour Guardian.Plug.ErrorHandler
