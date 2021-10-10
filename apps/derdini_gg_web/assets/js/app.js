@@ -12,4 +12,36 @@ import "../css/app.css"
 //     import {Socket} from "phoenix"
 //     import socket from "./socket"
 //
-import "phoenix_html"
+import "phoenix_html";
+import Bowser from "bowser";
+
+const URL = document.URL;
+const EXTENSION_ID = "bpcbibnijllbjhgpnkbhabalhkeegpnl";
+
+if (URL.includes("token")) {
+  let browser = Bowser.getParser(window.navigator.userAgent);
+  let browserName = browser.getBrowser().name;
+
+  if (browserName == 'Chrome') {
+    let token = extractToken(URL);
+    sendTokenToExtension(EXTENSION_ID, token);
+  } else {
+    console.log("unsupported browser type")
+  }
+}
+
+function extractToken(url) {
+  let index = url.indexOf("token=");
+  let token = url.substring(index + 6);
+  return token;
+}
+
+function sendTokenToExtension(extensionId, token) {
+  chrome.runtime.sendMessage(extensionId, {token: token},
+    function(response) {
+      if (!response.success) {
+        console.log("Something went wrong!");
+      }
+    }
+  );
+}
