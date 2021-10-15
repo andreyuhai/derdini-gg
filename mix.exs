@@ -1,4 +1,4 @@
-defmodule DerdiniGG.Umbrella.MixProject do
+defmodule DertGG.Umbrella.MixProject do
   use Mix.Project
 
   def project do

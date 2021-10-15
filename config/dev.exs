@@ -1,10 +1,10 @@
 use Mix.Config
 
 # Configure your database
-config :derdini_gg, DerdiniGG.Repo,
+config :dert_gg, DertGG.Repo,
   username: System.get_env("PSQL_USERNAME"),
   password: System.get_env("PSQL_PASSWORD"),
-  database: "derdini_gg_dev",
+  database: "dert_gg_dev",
   hostname: "localhost",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
@@ -15,7 +15,7 @@ config :derdini_gg, DerdiniGG.Repo,
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with webpack to recompile .js and .css sources.
-config :derdini_gg_web, DerdiniGGWeb.Endpoint,
+config :dert_gg_web, DertGGWeb.Endpoint,
   http: [port: 4000],
   debug_errors: true,
   code_reloader: true,
@@ -26,7 +26,7 @@ config :derdini_gg_web, DerdiniGGWeb.Endpoint,
       "--mode",
       "development",
       "--watch-stdin",
-      cd: Path.expand("../apps/derdini_gg_web/assets", __DIR__)
+      cd: Path.expand("../apps/dert_gg_web/assets", __DIR__)
     ]
   ]
 
@@ -55,13 +55,13 @@ config :derdini_gg_web, DerdiniGGWeb.Endpoint,
 # different ports.
 
 # Watch static and templates for browser reloading.
-config :derdini_gg_web, DerdiniGGWeb.Endpoint,
+config :dert_gg_web, DertGGWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
-      ~r"lib/derdini_gg_web/(live|views)/.*(ex)$",
-      ~r"lib/derdini_gg_web/templates/.*(eex)$"
+      ~r"lib/dert_gg_web/(live|views)/.*(ex)$",
+      ~r"lib/dert_gg_web/templates/.*(eex)$"
     ]
   ]
 

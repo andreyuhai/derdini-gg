@@ -1,3 +1,0 @@
-# DerdiniGG
-
-**TODO: Add description**
