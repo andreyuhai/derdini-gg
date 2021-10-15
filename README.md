@@ -7,4 +7,4 @@
 
 ### Not That Urgent TODOs
 
-- [ ] Change app name to dert-gg instead.
+- [x] Change app name to dert-gg instead.
