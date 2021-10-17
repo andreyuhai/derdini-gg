@@ -1,9 +1,13 @@
-alias DerdiniGG.{
+alias DertGG.{
   Accounts,
   Accounts.Account,
-  Repo
+  Entries,
+  Entries.Entry,
+  Repo,
+  Votes,
+  Votes.Vote
 }
 
-alias DerdiniGGWeb.{
+alias DertGGWeb.{
   Authentication
 }
