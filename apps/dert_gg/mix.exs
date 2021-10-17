@@ -40,7 +40,8 @@ defmodule DertGG.MixProject do
       {:ecto_sql, "~> 3.4"},
       {:postgrex, ">= 0.0.0"},
       {:jason, "~> 1.0"},
-      {:argon2_elixir, "~> 2.4"}
+      {:argon2_elixir, "~> 2.4"},
+      {:ex_machina, "~> 2.7", only: :test}
     ]
   end
 
