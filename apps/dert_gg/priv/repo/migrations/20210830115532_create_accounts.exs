@@ -6,7 +6,7 @@ defmodule DertGG.Repo.Migrations.CreateAccounts do
       add :email, :string
       add :encrypted_password, :string
 
-      timestamps()
+      timestamps(type: :utc_datetime)
     end
 
   end
