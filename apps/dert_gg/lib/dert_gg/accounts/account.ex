@@ -7,7 +7,9 @@ defmodule DertGG.Accounts.Account do
     field :password, :string, virtual: true
     field :encrypted_password, :string
 
-    timestamps()
+    has_many :votes, DertGG.Votes.Vote
+
+    timestamps(type: :utc_datetime)
   end
 
   @doc false
