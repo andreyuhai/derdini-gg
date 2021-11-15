@@ -101,4 +101,14 @@ defmodule DertGG.Entries do
   def change_entry(%Entry{} = entry, attrs \\ %{}) do
     Entry.changeset(entry, attrs)
   end
+
+  def upsert_entry(attrs \\ %{}) do
+    %Entry{}
+    |> Entry.changeset(attrs)
+    |> Repo.insert(
+      conflict_target: :entry_id,
+      on_conflict: {:replace_all_except, [:id, :inserted_at]},
+      returning: true
+    )
+  end
 end
