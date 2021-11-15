@@ -4,17 +4,18 @@ defmodule DertGGWeb.Authentication.Api.ErrorHandler do
   @behaviour Guardian.Plug.ErrorHandler
 
   @impl Guardian.Plug.ErrorHandler
-  def auth_error(conn, {:unauthenticated, reason}, _opts) do
+  def auth_error(conn, {:unauthenticated, _reason}, _opts) do
     conn
     |> json(%{
-      authorized: false
+      authenticated: false
     })
   end
 
   def auth_error(conn, {type, reason}, _opts) do
     conn
     |> json(%{
-      authorized: false
+      error: type,
+      reason: reason
     })
   end
 end
