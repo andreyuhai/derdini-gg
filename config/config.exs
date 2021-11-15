@@ -36,8 +36,8 @@ config :logger, :console,
 config :phoenix, :json_library, Jason
 
 # Guardian config
-config :dert_gg, DertGGWeb.Authentication,
-  issuer: "dert_gg",
+config :dert_gg_web, DertGGWeb.Authentication,
+  issuer: "dert_gg_web",
   secret_key: System.get_env("GUARDIAN_SECRET_KEY")
 
 # Import environment specific config. This must remain at the bottom
