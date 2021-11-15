@@ -16,7 +16,7 @@ import "phoenix_html";
 import Bowser from "bowser";
 
 const URL = document.URL;
-const EXTENSION_ID = "bpcbibnijllbjhgpnkbhabalhkeegpnl";
+const EXTENSION_ID = "dmcpeogfmcmenjadndfjhafnbhpabffn";
 
 if (URL.includes("token")) {
   let browser = Bowser.getParser(window.navigator.userAgent);
@@ -26,7 +26,7 @@ if (URL.includes("token")) {
     let token = extractToken(URL);
     sendTokenToExtension(EXTENSION_ID, token);
   } else {
-    console.log("unsupported browser type")
+    console.log("unsupported browser type");
   }
 }
 
