@@ -1,8 +1,11 @@
 defmodule DertGGWeb.PageControllerTest do
   use DertGGWeb.ConnCase
 
-  test "GET /", %{conn: conn} do
-    conn = get(conn, "/")
-    assert html_response(conn, 200) =~ "Welcome to Phoenix!"
+  describe "GET /" do
+    test "redirects to login if not logged in", %{conn: conn} do
+      conn = get(conn, "/")
+
+      assert redirected_to(conn) == Routes.session_path(conn, :new)
+    end
   end
 end

@@ -1,5 +1,5 @@
 defmodule DertGG.AccountsTest do
-  use DertGG.DataCase
+  use DertGG.DataCase, async: true
 
   alias DertGG.Accounts
   alias DertGG.Accounts.Account
@@ -42,7 +42,7 @@ defmodule DertGG.AccountsTest do
   end
 
   defp count_of(queryable) do
-    DertGG.Repo.aggregate(queryable, :count, :id)
+    Repo.aggregate(queryable, :count, :id)
   end
 
   defp valid_account_params do
