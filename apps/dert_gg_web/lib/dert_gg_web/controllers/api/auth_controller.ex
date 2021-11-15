@@ -7,7 +7,7 @@ defmodule DertGGWeb.Api.AuthController do
     with account <- Authentication.get_current_account(conn) do
       conn
       |> json(%{
-        authorized: true,
+        authenticated: true,
         data: %{
           email: account.email
         }
