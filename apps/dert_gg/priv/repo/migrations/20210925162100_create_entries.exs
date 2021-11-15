@@ -5,11 +5,14 @@ defmodule DertGG.Repo.Migrations.CreateEntries do
     create table(:entries) do
       add :author, :string
       add :author_id, :integer
-      add :content, :text
+      add :html_content, :text
+      add :text_content, :text
       add :entry_id, :integer
       add :entry_timestamp, :string
+      add :entry_created_at, :utc_datetime
+      add :entry_updated_at, :utc_datetime
       add :favorite_count, :integer
-      add :topic_uri, :string
+      add :topic_url, :string
 
       timestamps(type: :utc_datetime)
     end
