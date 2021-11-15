@@ -3,5 +3,5 @@ defmodule DertGGWeb.CORSRouter do
     origins: "*"
 
 
-  resource "/auth", allow_headers: ["Authorization"]
+  resource "/api/*", allow_headers: ["Authorization"]
 end
