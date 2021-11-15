@@ -6,12 +6,7 @@ defmodule DertGGWeb.Api.AuthController do
   def index(conn, _params) do
     with account <- Authentication.get_current_account(conn) do
       conn
-      |> json(%{
-        authenticated: true,
-        data: %{
-          email: account.email
-        }
-      })
+      |> json(%{})
     end
   end
 end
