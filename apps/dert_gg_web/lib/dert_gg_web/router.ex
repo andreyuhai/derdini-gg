@@ -40,7 +40,7 @@ defmodule DertGGWeb.Router do
     post "/login", SessionController, :create
   end
 
-  scope "/", DertGGWeb.Api do
+  scope "/api/v1", DertGGWeb.Api do
     pipe_through :api
 
     scope "/" do
@@ -48,6 +48,7 @@ defmodule DertGGWeb.Router do
 
       resources "/derts", PageController, only: [:index]
       get "/auth", AuthController, :index
+      post "/upvote", VoteController, :upvote
     end
   end
 
