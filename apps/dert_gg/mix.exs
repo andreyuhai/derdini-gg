@@ -36,12 +36,12 @@ defmodule DertGG.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix_pubsub, "~> 2.0"},
-      {:ecto_sql, "~> 3.4"},
-      {:postgrex, ">= 0.0.0"},
-      {:jason, "~> 1.0"},
       {:argon2_elixir, "~> 2.4"},
-      {:ex_machina, "~> 2.7", only: :test}
+      {:ecto_sql, "~> 3.4"},
+      {:ex_machina, "~> 2.7", only: :test},
+      {:jason, "~> 1.0"},
+      {:phoenix_pubsub, "~> 2.0"},
+      {:postgrex, ">= 0.0.0"}
     ]
   end
 
