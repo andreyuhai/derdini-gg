@@ -18,9 +18,12 @@ defmodule DertGGWeb.RegistrationController do
   def create(conn, %{"account" => account_params}) do
     case Accounts.register(account_params) do
       {:ok, account} ->
+        {:ok, jwt_for_extension, _} =
+          Authentication.encode_and_sign(account)
+
         conn
         |> Authentication.log_in(account)
-        |> redirect(to: Routes.page_path(conn, :index))
+        |> redirect(to: Routes.page_path(conn, :index, token: jwt_for_extension))
 
       {:error, changeset} ->
         render(conn, :new,
