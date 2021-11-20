@@ -4,7 +4,7 @@ defmodule DertGG.Votes.Vote do
   use Ecto.Schema
 
   schema "votes" do
-    belongs_to :entry, DertGG.Entries.Entry
+    belongs_to :entry, DertGG.Entries.Entry, references: :entry_id
     belongs_to :account, DertGG.Accounts.Account
 
     timestamps(type: :utc_datetime)
@@ -15,6 +15,7 @@ defmodule DertGG.Votes.Vote do
     |> change()
     |> put_assoc(:account, account)
     |> put_assoc(:entry, entry)
+    |> unique_constraint([:entry_id, :account_id])
   end
 
   def changeset(vote, %{account: account, entry: _} = attrs) do
@@ -22,5 +23,6 @@ defmodule DertGG.Votes.Vote do
     |> cast(attrs, [])
     |> cast_assoc(:entry, with: &DertGG.Entries.change_entry/2)
     |> put_assoc(:account, account)
+    |> unique_constraint([:entry_id, :account_id])
   end
 end
