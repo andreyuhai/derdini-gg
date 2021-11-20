@@ -61,23 +61,16 @@ defmodule DertGG.Entries do
     Entry.changeset(entry, attrs)
   end
 
-  def upsert_entry(%{entry_timestamp: entry_timestamp} = attrs) do
+  def upsert_entry(%{"entry_timestamp" => entry_timestamp} = attrs) do
     entry_created_at = entry_created_at_from_timestamp(entry_timestamp)
     entry_updated_at = entry_updated_at_from_timestamp(entry_timestamp)
 
     attrs =
-      Map.merge(attrs, %{entry_created_at: entry_created_at, entry_updated_at: entry_updated_at})
+      Map.merge(attrs, %{
+        "entry_created_at" => entry_created_at,
+        "entry_updated_at" => entry_updated_at
+      })
 
-    %Entry{}
-    |> change_entry(attrs)
-    |> Repo.insert(
-      conflict_target: :entry_id,
-      on_conflict: {:replace_all_except, [:id, :inserted_at]},
-      returning: true
-    )
-  end
-
-  def upsert_entry(attrs) do
     %Entry{}
     |> change_entry(attrs)
     |> Repo.insert(
