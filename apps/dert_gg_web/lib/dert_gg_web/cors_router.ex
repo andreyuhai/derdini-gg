@@ -2,6 +2,5 @@ defmodule DertGGWeb.CORSRouter do
   use Corsica.Router,
     origins: "*"
 
-
-  resource "/api/*", allow_headers: ["Authorization"]
+  resource "/api/*", allow_headers: ["Authorization","Content-Type"]
 end
