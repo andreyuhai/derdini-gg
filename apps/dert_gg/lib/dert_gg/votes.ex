@@ -8,20 +8,29 @@ defmodule DertGG.Votes do
   alias DertGG.Entries
   alias DertGG.Repo
   alias DertGG.Votes.Vote
-  alias Ecto.Multi
 
-  def create_vote(%{account: account, entry: entry}) do
-    Multi.new()
-    |> Multi.run(:entry, fn _repo, _changes ->
-      Entries.upsert_entry(entry)
+  def create_vote(%{account: account, entry_params: entry_params}) do
+    Repo.transaction(fn ->
+      {:ok, entry} = Entries.upsert_entry(entry_params)
+
+      {:ok, vote} =
+        %Vote{}
+        |> change_vote(%{account: account, entry: entry})
+        |> Repo.insert()
+
+      vote
     end)
-    |> Multi.insert(:vote, fn %{entry: entry} ->
-      change_vote(%Vote{}, %{account: account, entry: entry})
-    end)
-    |> Repo.transaction()
   end
 
   def change_vote(%Vote{} = vote, attrs \\ %{}) do
     Vote.changeset(vote, attrs)
+  end
+
+  def get_vote(account_id, entry_id) do
+    Repo.get_by(Vote, account_id: account_id, entry_id: entry_id)
+  end
+
+  def delete_vote(vote) do
+    Repo.delete(vote)
   end
 end
