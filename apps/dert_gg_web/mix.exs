@@ -39,18 +39,19 @@ defmodule DertGGWeb.MixProject do
     [
       {:argon2_elixir, "~> 2.4"},
       {:corsica, "~> 1.1"},
+      {:dert_gg, in_umbrella: true},
+      {:gettext, "~> 0.11"},
+      {:guardian, "~> 2.2"},
+      {:jason, "~> 1.0"},
       {:phoenix, "~> 1.5.11"},
       {:phoenix_ecto, "~> 4.4"},
       {:phoenix_html, "~> 2.11"},
-      {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:phoenix_live_dashboard, "~> 0.4"},
+      {:phoenix_live_reload, "~> 1.2", only: :dev},
+      {:plug_cowboy, "~> 2.0"},
       {:telemetry_metrics, "~> 0.4"},
       {:telemetry_poller, "~> 0.4"},
-      {:gettext, "~> 0.11"},
-      {:dert_gg, in_umbrella: true},
-      {:jason, "~> 1.0"},
-      {:plug_cowboy, "~> 2.0"},
-      {:guardian, "~> 2.2"}
+      {:tzdata, "~> 1.1"}
     ]
   end
 
