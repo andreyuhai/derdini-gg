@@ -22,15 +22,17 @@ defmodule DertGG.Entries.Entry do
 
   @fields [
     :author, :author_id, :html_content, :text_content,
-    :entry_id, :entry_timestamp, :entry_created_at,
-    :entry_updated_at, :favorite_count, :topic_url
+    :entry_id, :entry_timestamp, :entry_updated_at,
+    :entry_created_at, :favorite_count, :topic_url
   ]
+
+  @required_fields @fields -- [:entry_updated_at]
 
   @doc false
   def changeset(entry, attrs) do
     entry
     |> cast(attrs, @fields)
-    |> validate_required(@fields)
+    |> validate_required(@required_fields)
     |> unique_constraint(:entry_id)
   end
 end
