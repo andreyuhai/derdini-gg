@@ -9,19 +9,6 @@ defmodule DertGG.Entries do
   alias DertGG.Entries.Entry
 
   @doc """
-  Returns the list of entries.
-
-  ## Examples
-
-      iex> list_entries()
-      [%Entry{}, ...]
-
-  """
-  def list_entries do
-    Repo.all(Entry)
-  end
-
-  @doc """
   Gets a single entry.
 
   Raises `Ecto.NoResultsError` if the Entry does not exist.
@@ -49,44 +36,16 @@ defmodule DertGG.Entries do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_entry(attrs \\ %{}) do
+  def create_entry(%{entry_timestamp: entry_timestamp} = attrs) do
+    entry_created_at = entry_created_at_from_timestamp(entry_timestamp)
+    entry_updated_at = entry_updated_at_from_timestamp(entry_timestamp)
+
+    attrs =
+      Map.merge(attrs, %{entry_created_at: entry_created_at, entry_updated_at: entry_updated_at})
+
     %Entry{}
-    |> Entry.changeset(attrs)
+    |> change_entry(attrs)
     |> Repo.insert()
-  end
-
-  @doc """
-  Updates a entry.
-
-  ## Examples
-
-      iex> update_entry(entry, %{field: new_value})
-      {:ok, %Entry{}}
-
-      iex> update_entry(entry, %{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def update_entry(%Entry{} = entry, attrs) do
-    entry
-    |> Entry.changeset(attrs)
-    |> Repo.update()
-  end
-
-  @doc """
-  Deletes a entry.
-
-  ## Examples
-
-      iex> delete_entry(entry)
-      {:ok, %Entry{}}
-
-      iex> delete_entry(entry)
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def delete_entry(%Entry{} = entry) do
-    Repo.delete(entry)
   end
 
   @doc """
