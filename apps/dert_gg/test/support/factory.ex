@@ -13,10 +13,10 @@ defmodule DertGG.Factory do
       text_content: "gitar calmak icin kullanilan minik plastik garip nesne.",
       entry_id: sequence(:entry_id, & &1),
       entry_timestamp: "16.02.2015 13:57 ~ 13:59",
-      entry_created_at: DateTime.utc_now(),
-      entry_updated_at: DateTime.utc_now(),
+      entry_created_at: ~U[2015-02-16 10:57:00Z],
+      entry_updated_at: ~U[2015-02-16 10:59:00Z],
       favorite_count: :rand.uniform(10),
-      topic_url: "https://eksisozluk.com/wi-fi-sifresini-isteyen-komsuyu-savusturma-yollari--4692875"
+      topic_url: "https://eksisozluk.com/pena--31782"
     }
   end
 
