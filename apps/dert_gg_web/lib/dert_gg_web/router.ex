@@ -47,8 +47,8 @@ defmodule DertGGWeb.Router do
       pipe_through :api_auth
 
       resources "/derts", PageController, only: [:index]
-      get "/auth", AuthController, :index
-      post "/upvote", VoteController, :upvote
+      resources "/votes", VoteController, only: [:create]
+      resources "/auth", AuthController, only: [:index]
     end
   end
 
