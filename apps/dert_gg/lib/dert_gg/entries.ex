@@ -61,13 +61,89 @@ defmodule DertGG.Entries do
     Entry.changeset(entry, attrs)
   end
 
-  def upsert_entry(attrs \\ %{}) do
+  def upsert_entry(%{entry_timestamp: entry_timestamp} = attrs) do
+    entry_created_at = entry_created_at_from_timestamp(entry_timestamp)
+    entry_updated_at = entry_updated_at_from_timestamp(entry_timestamp)
+
+    attrs =
+      Map.merge(attrs, %{entry_created_at: entry_created_at, entry_updated_at: entry_updated_at})
+
     %Entry{}
-    |> Entry.changeset(attrs)
+    |> change_entry(attrs)
     |> Repo.insert(
       conflict_target: :entry_id,
       on_conflict: {:replace_all_except, [:id, :inserted_at]},
       returning: true
     )
+  end
+
+  def upsert_entry(attrs) do
+    %Entry{}
+    |> change_entry(attrs)
+    |> Repo.insert(
+      conflict_target: :entry_id,
+      on_conflict: {:replace_all_except, [:id, :inserted_at]},
+      returning: true
+    )
+  end
+
+  defp entry_created_at_from_timestamp(entry_timestamp) do
+    ~r/^(?<date>(?<day>\d{2})\.(?<month>\d{2})\.(?<year>\d{4}))\s*(?<time>(?<hour>\d{2}):(?<minute>\d{2}))?/
+    |> Regex.named_captures(entry_timestamp)
+    |> datetime_from_map()
+  end
+
+  defp entry_updated_at_from_timestamp(entry_timestamp) do
+    entry_created_at = entry_created_at_from_timestamp(entry_timestamp)
+
+    ~r/~{1}\s+(?<date>(?<day>\d{2})\.(?<month>\d{2})\.(?<year>\d{4}))?\s*(?<time>(?<hour>\d{2}):(?<minute>\d{2}))/
+    |> Regex.named_captures(entry_timestamp)
+    # Check whether the entry was updated on the same date
+    |> case do
+      %{"date" => ""} = entry_updated_at_map ->
+        %{
+          entry_updated_at_map
+          | "day" => entry_created_at.day |> to_string() |> String.pad_leading(2, "0"),
+            "month" => entry_created_at.month |> to_string() |> String.pad_leading(2, "0"),
+            "year" => entry_created_at.year
+        }
+
+      map ->
+        map
+    end
+    |> datetime_from_map()
+  end
+
+  defp datetime_from_map(nil), do: nil
+
+  defp datetime_from_map(%{
+         "day" => day,
+         "month" => month,
+         "year" => year,
+         "hour" => "",
+         "minute" => ""
+       }) do
+    # Passing the hour as 03:00 because Turkey's time is UTC+03:00 so unknown hours will be 00:00
+    datetime_from_map(%{
+      "day" => day,
+      "month" => month,
+      "year" => year,
+      "hour" => "03",
+      "minute" => "00"
+    })
+  end
+
+  defp datetime_from_map(%{
+         "day" => day,
+         "month" => month,
+         "year" => year,
+         "hour" => hour,
+         "minute" => minute
+       }) do
+    # +03:00 added at the end because Turkey's time is UTC+03:00
+    {:ok, datetime, _} =
+      DateTime.from_iso8601("#{year}-#{month}-#{day} #{hour}:#{minute}:00+03:00")
+
+    datetime
   end
 end
