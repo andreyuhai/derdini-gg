@@ -18,22 +18,22 @@ defmodule DertGG.EntriesTest do
     ]
   }
 
+  setup do
+    entry_params = %{
+      author: "ssg",
+      author_id: "8097",
+      html_content: "gitar calmak icin kullanilan minik plastik garip nesne.",
+      text_content: "gitar calmak icin kullanilan minik plastik garip nesne.",
+      entry_id: "1",
+      entry_timestamp: "15.02.1999",
+      favorite_count: "13616",
+      topic_url: "https://eksisozluk.com/pena--31782"
+    }
+
+    %{entry_params: entry_params}
+  end
+
   describe "create_entry/1" do
-    setup do
-      entry_params = %{
-        author: "ssg",
-        author_id: "8097",
-        html_content: "gitar calmak icin kullanilan minik plastik garip nesne.",
-        text_content: "gitar calmak icin kullanilan minik plastik garip nesne.",
-        entry_id: "1",
-        entry_timestamp: "15.02.1999",
-        favorite_count: "13616",
-        topic_url: "https://eksisozluk.com/pena--31782"
-      }
-
-      %{entry_params: entry_params}
-    end
-
     for {entry_timestamp,
          [entry_created_at: entry_created_at, entry_updated_at: entry_updated_at]} <-
           @possible_entry_timestamps do
@@ -57,11 +57,29 @@ defmodule DertGG.EntriesTest do
 
       assert {:error, %Ecto.Changeset{}} = Entries.create_entry(invalid_entry_params)
     end
+  end
 
-    test "change_entry/1 returns an entry changeset" do
-      entry = Factory.insert(:entry)
+  test "change_entry/1 returns an entry changeset" do
+    entry = Factory.insert(:entry)
 
-      assert %Ecto.Changeset{} = Entries.change_entry(entry)
+    assert %Ecto.Changeset{} = Entries.change_entry(entry)
+  end
+
+  describe "upsert_entry/1" do
+    test "upserts entries with different entry timestamps", %{entry_params: entry_params} do
+      for {entry_timestamp,
+           [entry_created_at: entry_created_at, entry_updated_at: entry_updated_at]} <-
+            @possible_entry_timestamps do
+        entry_params = %{entry_params | entry_timestamp: entry_timestamp}
+
+        assert {:ok, %Entry{} = entry} = Entries.upsert_entry(entry_params)
+
+        assert entry.entry_created_at == entry_created_at,
+               "With given entry_timestamp #{entry_params.entry_timestamp} got entry_created_at as #{entry.entry_created_at}"
+
+        assert entry.entry_updated_at == entry_updated_at,
+               "With given entry_timestamp #{entry_params.entry_timestamp} got entry_updated_at as #{entry.entry_updated_at}"
+      end
     end
   end
 end
