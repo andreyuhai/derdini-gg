@@ -61,14 +61,14 @@ defmodule DertGG.Entries do
     Entry.changeset(entry, attrs)
   end
 
-  def upsert_entry(%{"entry_timestamp" => entry_timestamp} = attrs) do
+  def upsert_entry(%{entry_timestamp: entry_timestamp} = attrs) do
     entry_created_at = entry_created_at_from_timestamp(entry_timestamp)
     entry_updated_at = entry_updated_at_from_timestamp(entry_timestamp)
 
     attrs =
       Map.merge(attrs, %{
-        "entry_created_at" => entry_created_at,
-        "entry_updated_at" => entry_updated_at
+        entry_created_at: entry_created_at,
+        entry_updated_at: entry_updated_at
       })
 
     %Entry{}
