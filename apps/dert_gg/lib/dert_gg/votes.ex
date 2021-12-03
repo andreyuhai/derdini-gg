@@ -33,4 +33,8 @@ defmodule DertGG.Votes do
   def delete_vote(vote) do
     Repo.delete(vote)
   end
+
+  def get_count(entry_id) do
+    Repo.one(from v in Vote, where: v.entry_id == ^entry_id, select: count())
+  end
 end
