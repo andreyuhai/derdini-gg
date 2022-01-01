@@ -33,4 +33,17 @@ defmodule DertGG.Factory do
       account: build(:account)
     }
   end
+
+  def entry_params_factory do
+    %{
+      author: "ssg",
+      author_id: "8097",
+      html_content: "gitar calmak icin kullanilan minik plastik garip nesne.",
+      text_content: "gitar calmak icin kullanilan minik plastik garip nesne.",
+      entry_id: "1",
+      entry_timestamp: "15.02.1999",
+      favorite_count: "13616",
+      topic_url: "https://eksisozluk.com/pena--31782"
+    }
+  end
 end
