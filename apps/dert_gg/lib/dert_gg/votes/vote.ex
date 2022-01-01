@@ -18,13 +18,4 @@ defmodule DertGG.Votes.Vote do
     |> assoc_constraint(:entry)
     |> unique_constraint([:entry_id, :account_id])
   end
-
-  def changeset(vote, %{account: account, entry: _} = attrs) do
-    vote
-    |> cast(attrs, [])
-    |> cast_assoc(:entry, with: &DertGG.Entries.change_entry/2)
-    |> put_assoc(:account, account)
-    |> foreign_key_constraint(:entry_id)
-    |> unique_constraint([:entry_id, :account_id])
-  end
 end
