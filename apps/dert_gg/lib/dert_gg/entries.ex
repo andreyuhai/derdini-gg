@@ -24,6 +24,8 @@ defmodule DertGG.Entries do
   """
   def get_entry!(id), do: Repo.get!(Entry, id)
 
+  def get_entries(), do: Repo.all(from e in Entry, preload: [:votes])
+
   @doc """
   Creates a entry.
 
