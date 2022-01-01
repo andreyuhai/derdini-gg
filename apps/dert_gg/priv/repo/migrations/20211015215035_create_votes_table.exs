@@ -3,7 +3,7 @@ defmodule DertGG.Repo.Migrations.CreateVotesTable do
 
   def change do
     create table(:votes) do
-      add :entry_id, :integer
+      add :entry_id, references(:entries)
       add :account_id, :integer
 
       timestamps(type: :utc_datetime)
