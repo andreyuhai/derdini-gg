@@ -16,7 +16,7 @@ import "phoenix_html";
 import Bowser from "bowser";
 
 const URL = document.URL;
-const EXTENSION_ID = "dmcpeogfmcmenjadndfjhafnbhpabffn";
+const EXTENSION_ID = "npkjaedpppcmppnffnlphmdipfnmdkko";
 
 if (URL.includes("token")) {
   let browser = Bowser.getParser(window.navigator.userAgent);
