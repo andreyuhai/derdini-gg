@@ -1,7 +1,25 @@
-<section class="phx-hero">
-  <h1>Hello, <%= "#{@current_account.email}" %></h1>
-  <p>Peace of mind from prototype to production</p>
-</section>
+<%= if length(@entries) > 0 do %>
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Entry</th>
+        <th scope="col">By</th>
+        <th scope="col">GG Count</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= for {entry, index} <- Enum.with_index(@entries, 1) do %>
+        <tr>
+          <th scope="row"><%= index %></th>
+          <td><a href="https://eksisozluk.com/entry/<%=entry.entry_id%>">Entry link</a></td>
+          <td><%= entry.author %></td>
+          <td><%= IO.inspect(length(entry.votes)) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
 
 <section class="row">
   <article class="column">
