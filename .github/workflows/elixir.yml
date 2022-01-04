@@ -19,6 +19,10 @@ jobs:
       with:
         elixir-version: '1.12.3' # Define the elixir version [required]
         otp-version: '24.1' # Define the OTP version [required]
+    - name: Set ENV variables
+      env:
+        PSQL_USERNAME: postgres
+        PSQL_PASSWORD: postgres
     - name: Restore dependencies cache
       uses: actions/cache@v2
       with:
