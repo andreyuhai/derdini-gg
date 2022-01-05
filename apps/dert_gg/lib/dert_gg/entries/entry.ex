@@ -15,15 +15,22 @@ defmodule DertGG.Entries.Entry do
     field :favorite_count, :integer
     field :topic_url, :string
 
-    has_many :votes, DertGG.Votes.Vote
+    has_many :votes, DertGG.Votes.Vote, foreign_key: :entry_id, references: :entry_id
 
     timestamps(type: :utc_datetime)
   end
 
   @fields [
-    :author, :author_id, :html_content, :text_content,
-    :entry_id, :entry_timestamp, :entry_updated_at,
-    :entry_created_at, :favorite_count, :topic_url
+    :author,
+    :author_id,
+    :html_content,
+    :text_content,
+    :entry_id,
+    :entry_timestamp,
+    :entry_updated_at,
+    :entry_created_at,
+    :favorite_count,
+    :topic_url
   ]
 
   @required_fields @fields -- [:entry_updated_at]
