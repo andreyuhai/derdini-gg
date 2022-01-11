@@ -15,7 +15,7 @@ defmodule DertGG.Entries.Entry do
     field :favorite_count, :integer
     field :topic_url, :string
 
-    has_many :votes, DertGG.Votes.Vote, foreign_key: :entry_id
+    has_many :votes, DertGG.Votes.Vote
 
     timestamps(type: :utc_datetime)
   end
