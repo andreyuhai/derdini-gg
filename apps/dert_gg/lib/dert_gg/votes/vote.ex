@@ -4,7 +4,7 @@ defmodule DertGG.Votes.Vote do
   use Ecto.Schema
 
   schema "votes" do
-    belongs_to :entry, DertGG.Entries.Entry, foreign_key: :entry_id
+    belongs_to :entry, DertGG.Entries.Entry, references: :entry_id
     belongs_to :account, DertGG.Accounts.Account
 
     timestamps(type: :utc_datetime)
