@@ -4,9 +4,11 @@ defmodule DertGGWeb.RegistrationController do
   alias DertGG.Accounts
   alias DertGGWeb.Authentication
 
+  import Phoenix.LiveView.Controller
+
   def new(conn, _) do
     if Authentication.get_current_account(conn) do
-      redirect(conn, to: Routes.page_path(conn, :index))
+      redirect(conn, to: "/")
     else
       render(conn, :new,
         changeset: Accounts.change_account(),
@@ -18,12 +20,11 @@ defmodule DertGGWeb.RegistrationController do
   def create(conn, %{"account" => account_params}) do
     case Accounts.register(account_params) do
       {:ok, account} ->
-        {:ok, jwt_for_extension, _} =
-          Authentication.encode_and_sign(account)
+        {:ok, jwt_for_extension, _} = Authentication.encode_and_sign(account)
 
         conn
         |> Authentication.log_in(account)
-        |> redirect(to: Routes.page_path(conn, :index, token: jwt_for_extension))
+        |> redirect(to: "/?token=#{jwt_for_extension}")
 
       {:error, changeset} ->
         render(conn, :new,
