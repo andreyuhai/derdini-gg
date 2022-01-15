@@ -31,9 +31,10 @@ defmodule DertGGWeb.Router do
     scope "/" do
       pipe_through :browser_auth
 
-      get "/", PageController, :index
       delete "/logout", SessionController, :delete
     end
+
+    live "/", DertsLive
 
     get "/register", RegistrationController, :new
     post "/register", RegistrationController, :create
