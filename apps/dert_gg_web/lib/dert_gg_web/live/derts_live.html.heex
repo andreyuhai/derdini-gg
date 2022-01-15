@@ -1,0 +1,20 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Entry</th>
+      <th scope="col">Yazar</th>
+      <th scope="col">Defa GG'lendi</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for {entry, index} <- Enum.with_index(@entries, 1) do %>
+      <tr class="table-hover">
+        <th scope="row"><%= index %></th>
+        <td><%= entry.text_content %></td>
+        <td><a href={"https://eksisozluk.com/entry/#{entry.entry_id}"}><%= entry.author %></a></td>
+        <td><%= IO.inspect(length(entry.votes)) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
