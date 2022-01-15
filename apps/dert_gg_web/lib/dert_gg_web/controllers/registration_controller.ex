@@ -4,8 +4,6 @@ defmodule DertGGWeb.RegistrationController do
   alias DertGG.Accounts
   alias DertGGWeb.Authentication
 
-  import Phoenix.LiveView.Controller
-
   def new(conn, _) do
     if Authentication.get_current_account(conn) do
       redirect(conn, to: "/")

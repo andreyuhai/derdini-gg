@@ -1,9 +1,7 @@
 defmodule DertGGWeb.DertsLive do
   use DertGGWeb, :live_view
 
-  alias DertGGWeb.Authentication
-
-  def mount(_params, session, socket) do
+  def mount(_params, _session, socket) do
     entries = DertGG.Entries.get_entries()
 
     {
