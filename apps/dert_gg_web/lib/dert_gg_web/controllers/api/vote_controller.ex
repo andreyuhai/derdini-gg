@@ -4,6 +4,7 @@ defmodule DertGGWeb.Api.VoteController do
   alias DertGGWeb.Authentication
   alias DertGG.Votes
   alias DertGG.Votes.Vote
+  alias Phoenix.PubSub
 
   def create(conn, params) do
     with account <- Authentication.get_current_account(conn) do
