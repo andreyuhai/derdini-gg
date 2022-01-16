@@ -7,6 +7,7 @@ defmodule DertGGWeb.Application do
 
   def start(_type, _args) do
     children = [
+      {Phoenix.PubSub, name: DertGGWeb.PubSub},
       # Start the Telemetry supervisor
       DertGGWeb.Telemetry,
       # Start the Endpoint (http/https)
