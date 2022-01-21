@@ -26,6 +26,18 @@ defmodule DertGG.Entries do
 
   def get_entries(), do: Repo.all(from e in Entry, preload: [:votes])
 
+  def get_top_entries(opts \\ [top: 10]) do
+    limit = Keyword.get(opts, :top)
+
+    Entry
+    |> join(:left, [e], v in assoc(e, :votes))
+    |> select([e], %{entry: e, vote_count: count(e.id)})
+    |> group_by([e], e.id)
+    |> order_by([e], desc: count(e.id), desc: e.inserted_at)
+    |> limit(^limit)
+    |> Repo.all()
+  end
+
   @doc """
   Creates a entry.
 

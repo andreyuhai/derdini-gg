@@ -8,12 +8,12 @@
     </tr>
   </thead>
   <tbody>
-    <%= for {entry, index} <- Enum.with_index(@entries, 1) do %>
+    <%= for {%{entry: entry, vote_count: vote_count}, index} <- Enum.with_index(@entries, 1) do %>
       <tr class="table-hover">
         <th scope="row"><%= index %></th>
         <td><%= entry.text_content %></td>
         <td><a href={"https://eksisozluk.com/entry/#{entry.entry_id}"}><%= entry.author %></a></td>
-        <td><%= IO.inspect(length(entry.votes)) %></td>
+        <td><%= vote_count %></td>
       </tr>
     <% end %>
   </tbody>

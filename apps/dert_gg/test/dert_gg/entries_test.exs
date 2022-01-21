@@ -73,4 +73,36 @@ defmodule DertGG.EntriesTest do
       end
     end
   end
+
+  describe "get_top_entries/0-1" do
+    test "returns top 10 entries by vote count by default" do
+      entry1 = Factory.insert(:entry)
+      Factory.insert_list(3, :vote, entry: entry1)
+
+      entry2 = Factory.insert(:entry)
+      Factory.insert_list(2, :vote, entry: entry2)
+
+      Factory.insert_list(9, :vote)
+
+      entries = Entries.get_top_entries()
+
+      assert length(entries) == 10
+
+      # First entry is the one with the highest vote count
+      assert [%{entry: ^entry1, vote_count: 3} | _] = entries
+    end
+
+    test "returns the given number of entries by vote count" do
+      entry1 = Factory.insert(:entry)
+      Factory.insert_list(2, :vote, entry: entry1)
+
+      entry2 = Factory.insert(:entry)
+      Factory.insert_list(1, :vote, entry: entry2)
+
+      entries = Entries.get_top_entries(top: 1)
+
+      assert %{entry: entry1, vote_count: 2} in entries
+      refute %{entry: entry2, vote_count: 1} in entries
+    end
+  end
 end

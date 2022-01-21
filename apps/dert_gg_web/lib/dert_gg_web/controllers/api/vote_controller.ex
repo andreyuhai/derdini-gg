@@ -1,9 +1,10 @@
 defmodule DertGGWeb.Api.VoteController do
   use DertGGWeb, :controller
 
-  alias DertGGWeb.Authentication
+  alias DertGG.Entries
   alias DertGG.Votes
   alias DertGG.Votes.Vote
+  alias DertGGWeb.Authentication
   alias Phoenix.PubSub
 
   def create(conn, params) do
@@ -20,6 +21,7 @@ defmodule DertGGWeb.Api.VoteController do
       end
 
       vote_count = Votes.get_count(entry_id)
+      PubSub.broadcast(DertGGWeb.PubSub, "vote-updates", %{entries: Entries.get_top_entries()})
 
       conn
       |> json(%{
