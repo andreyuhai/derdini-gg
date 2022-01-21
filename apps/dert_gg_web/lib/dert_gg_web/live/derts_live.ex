@@ -4,7 +4,7 @@ defmodule DertGGWeb.DertsLive do
   alias Phoenix.PubSub
 
   def mount(_params, _session, socket) do
-    entries = DertGG.Entries.get_entries()
+    entries = DertGG.Entries.get_top_entries()
     if connected?(socket), do: PubSub.subscribe(DertGGWeb.PubSub, "vote-updates")
 
     {:ok, assign(socket, :entries, entries)}
