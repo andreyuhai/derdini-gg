@@ -50,6 +50,7 @@ defmodule DertGGWeb.MixProject do
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:phoenix_live_view, "~> 0.17.5"},
       {:plug_cowboy, "~> 2.0"},
+      {:swoosh, "~> 1.6"},
       {:telemetry_metrics, "~> 0.4"},
       {:telemetry_poller, "~> 0.4"},
       {:tzdata, "~> 1.1"}
