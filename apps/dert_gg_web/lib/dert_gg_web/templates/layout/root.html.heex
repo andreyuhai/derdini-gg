@@ -15,7 +15,9 @@
         <nav role="navigation">
           <ul>
             <%= if @conn.assigns[:current_account] do %>
-              <li><%= link("Log Out", to: Routes.session_path(@conn, :delete), method: :delete)%></li>
+              <li><%= link("Logout", to: Routes.session_path(@conn, :delete), method: :delete)%></li>
+            <% else %>
+              <li><%= link("Login", to: Routes.session_path(@conn, :new))%></li>
             <% end %>
           </ul>
         </nav>
