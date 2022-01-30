@@ -1,5 +1,0 @@
-<div class="social-log-in">
-  <p>Or log in with</p>
-  <%= link "Google", to: "#", class: "button button-primary" %>
-  <%= link "Twitter", to: "#", class: "button button-primary" %>
-</div>
