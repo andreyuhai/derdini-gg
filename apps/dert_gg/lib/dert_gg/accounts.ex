@@ -75,6 +75,12 @@ defmodule DertGG.Accounts do
     |> Repo.update()
   end
 
+  def update_password(account, attrs) do
+    account
+    |> Account.password_reset_changeset(attrs)
+    |> Repo.update()
+  end
+
   @doc """
   Deletes an account.
 
@@ -102,6 +108,10 @@ defmodule DertGG.Accounts do
   """
   def change_account(account \\ %Account{}) do
     Account.changeset(account, %{})
+  end
+
+  def change_password(account) do
+    Account.password_reset_changeset(account, %{})
   end
 
   def register(params) do
