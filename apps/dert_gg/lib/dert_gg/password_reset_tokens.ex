@@ -5,6 +5,9 @@ defmodule DertGG.PasswordResetTokens do
 
   def create_password_reset_token(%{"email" => email}) do
     case Accounts.get_by_email(email) do
+      nil ->
+        {:error, :account_not_found}
+
       account ->
         {:ok, reset_token, _} =
           DertGGWeb.Authentication.encode_and_sign(account, %{}, ttl: {30, :minutes})
@@ -15,9 +18,6 @@ defmodule DertGG.PasswordResetTokens do
           reset_token: reset_token
         })
         |> Repo.insert()
-
-      nil ->
-        {:error, :account_not_found}
     end
   end
 
