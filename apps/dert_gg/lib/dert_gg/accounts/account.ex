@@ -22,6 +22,14 @@ defmodule DertGG.Accounts.Account do
     |> put_encrypted_password()
   end
 
+  def password_reset_changeset(account, attrs \\ %{}) do
+    account
+    |> cast(attrs, [:password])
+    |> validate_required([:password])
+    |> validate_confirmation(:password, required: true)
+    |> put_encrypted_password()
+  end
+
   defp put_encrypted_password(%{valid?: true, changes: %{password: pw}} = changeset) do
     put_change(changeset, :encrypted_password, Argon2.hash_pwd_salt(pw))
   end
