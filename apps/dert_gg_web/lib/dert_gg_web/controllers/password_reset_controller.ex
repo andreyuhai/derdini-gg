@@ -47,7 +47,7 @@ defmodule DertGGWeb.PasswordResetController do
     with {:ok, account, _} <- Authentication.resource_from_token(reset_token),
          false <- PasswordResetTokens.reset_token_used?(reset_token) do
       case Accounts.update_password(account, password_reset_params) do
-        {:ok, account} ->
+        {:ok, _account} ->
           PasswordResetTokens.update_as_used(reset_token)
 
           conn
