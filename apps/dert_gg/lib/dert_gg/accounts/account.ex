@@ -8,6 +8,7 @@ defmodule DertGG.Accounts.Account do
     field :encrypted_password, :string
 
     has_many :votes, DertGG.Votes.Vote
+    has_many :password_reset_tokens, DertGG.PasswordResetTokens.PasswordResetToken
 
     timestamps(type: :utc_datetime)
   end
