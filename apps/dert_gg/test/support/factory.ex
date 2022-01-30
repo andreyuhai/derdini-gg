@@ -3,6 +3,7 @@ defmodule DertGG.Factory do
 
   alias DertGG.Accounts.Account
   alias DertGG.Entries.Entry
+  alias DertGG.PasswordResetTokens.PasswordResetToken
   alias DertGG.Votes.Vote
 
   def entry_factory do
@@ -44,6 +45,21 @@ defmodule DertGG.Factory do
       entry_timestamp: "15.02.1999",
       favorite_count: "13616",
       topic_url: "https://eksisozluk.com/pena--31782"
+    }
+  end
+
+  def password_reset_token_factory(attrs) do
+    account =
+      Map.get_lazy(attrs, :account, fn ->
+        insert(:account)
+      end)
+
+    {:ok, reset_token, _} = DertGGWeb.Authentication.encode_and_sign(account)
+
+    %PasswordResetToken{
+      account: build(:account),
+      reset_token: reset_token,
+      used: false
     }
   end
 end
