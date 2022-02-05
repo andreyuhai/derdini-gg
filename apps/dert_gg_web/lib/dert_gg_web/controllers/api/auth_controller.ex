@@ -4,7 +4,7 @@ defmodule DertGGWeb.Api.AuthController do
   alias DertGGWeb.Authentication
 
   def index(conn, _params) do
-    with account <- Authentication.get_current_account(conn) do
+    with _account <- Authentication.get_current_account(conn) do
       conn
       |> json(%{})
     end

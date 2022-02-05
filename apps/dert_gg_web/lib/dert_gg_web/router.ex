@@ -36,11 +36,9 @@ defmodule DertGGWeb.Router do
 
     live "/", DertsLive
 
-    get "/register", RegistrationController, :new
-    post "/register", RegistrationController, :create
-
-    get "/login", SessionController, :new
-    post "/login", SessionController, :create
+    resources "/login", SessionController, only: [:new, :create]
+    resources "/password-reset", PasswordResetController, only: [:new, :create, :update, :edit]
+    resources "/register", RegistrationController, only: [:new, :create]
   end
 
   scope "/api/v1", DertGGWeb.Api do

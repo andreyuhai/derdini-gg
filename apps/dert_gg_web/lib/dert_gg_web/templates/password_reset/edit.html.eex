@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="column column-50 column-offset-25">
+    <h1>Reset password</h1>
+    <%= form_for @password_reset_changeset, @action, [as: :password_reset_params], fn f -> %>
+      <%= label f, :password, "Password" %>
+      <%= password_input f, :password %>
+      <%= error_tag f, :password %>
+
+      <%= label f, :password_confirmation, "Password Confirmation" %>
+      <%= password_input f, :password_confirmation %>
+      <%= error_tag f, :password_confirmation %>
+
+      <%= submit "Set password", class: "button button-primary" %>
+    <% end %>
+  </div>
+</div>

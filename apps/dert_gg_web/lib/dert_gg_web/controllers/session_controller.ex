@@ -6,10 +6,11 @@ defmodule DertGGWeb.SessionController do
 
   def new(conn, _) do
     if Authentication.get_current_account(conn) do
-      redirect(conn, to: Routes.page_path(conn, :index))
+      redirect(conn, to: Routes.live_path(conn, DertGGWeb.DertsLive))
     else
       render(
-        conn, :new,
+        conn,
+        :new,
         changeset: Accounts.change_account(),
         action: Routes.session_path(conn, :create)
       )
@@ -19,12 +20,11 @@ defmodule DertGGWeb.SessionController do
   def create(conn, %{"account" => %{"email" => email, "password" => password}}) do
     case email |> Accounts.get_by_email() |> Authentication.authenticate(password) do
       {:ok, account} ->
-        {:ok, jwt_for_extension, _} =
-          Authentication.encode_and_sign(account)
+        {:ok, jwt_for_extension, _} = Authentication.encode_and_sign(account)
 
         conn
         |> Authentication.log_in(account)
-        |> redirect(to: Routes.page_path(conn, :index, token: jwt_for_extension))
+        |> redirect(to: Routes.live_path(conn, DertGGWeb.DertsLive, token: jwt_for_extension))
 
       {:error, :invalid_credentials} ->
         conn

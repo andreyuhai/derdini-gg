@@ -1,13 +1,4 @@
-# This file is responsible for configuring your umbrella
-# and **all applications** and their dependencies with the
-# help of Mix.Config.
-#
-# Note that all applications in your umbrella share the
-# same configuration and dependencies, which is why they
-# all use the same configuration file. If you want different
-# configurations or dependencies per app, it is best to
-# move said applications out of the umbrella.
-use Mix.Config
+import Config
 
 # Configure Mix tasks and generators
 config :dert_gg,
@@ -39,6 +30,11 @@ config :phoenix, :json_library, Jason
 config :dert_gg_web, DertGGWeb.Authentication,
   issuer: "dert_gg_web",
   secret_key: System.get_env("GUARDIAN_SECRET_KEY")
+
+# Swoosh config
+config :dert_gg_web, DertGGWeb.Mailer,
+  adapter: Swoosh.Adapters.Sendinblue,
+  api_key: System.get_env("SENDINBLUE_API_KEY")
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

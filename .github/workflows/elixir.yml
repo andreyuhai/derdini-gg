@@ -14,6 +14,7 @@ jobs:
     env:
       PSQL_USERNAME: postgres
       PSQL_PASSWORD: postgres
+      GUARDIAN_SECRET_KEY: TZknztVBV2TvDxlxKShPzVtguTAOva1PqEDcpKc0vYZzhvojR2FD2+7tIEhXU3bW
 
     # Service containers to run with
     services:

@@ -28,9 +28,3 @@
     </p>
   </div>
 </div>
-
-<div class="row">
-  <div class="column column-50 column-offset-25">
-    <%= render(DertGGWeb.SessionView, "social_links.html", assigns) %>
-  </div>
-</div>

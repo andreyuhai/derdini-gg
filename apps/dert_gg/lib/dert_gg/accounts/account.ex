@@ -8,6 +8,7 @@ defmodule DertGG.Accounts.Account do
     field :encrypted_password, :string
 
     has_many :votes, DertGG.Votes.Vote
+    has_many :password_reset_tokens, DertGG.PasswordResetTokens.PasswordResetToken
 
     timestamps(type: :utc_datetime)
   end
@@ -19,6 +20,14 @@ defmodule DertGG.Accounts.Account do
     |> validate_required([:email, :password])
     |> validate_confirmation(:password, required: true)
     |> unique_constraint(:email)
+    |> put_encrypted_password()
+  end
+
+  def password_reset_changeset(account, attrs \\ %{}) do
+    account
+    |> cast(attrs, [:password])
+    |> validate_required([:password])
+    |> validate_confirmation(:password, required: true)
     |> put_encrypted_password()
   end
 
