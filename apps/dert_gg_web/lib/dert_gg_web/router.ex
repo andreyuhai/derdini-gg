@@ -73,4 +73,12 @@ defmodule DertGGWeb.Router do
       live_dashboard "/dashboard", metrics: DertGGWeb.Telemetry
     end
   end
+
+  if Mix.env() == :dev do
+    scope "/dev" do
+      pipe_through [:browser]
+
+      forward "/mailbox", Plug.Swoosh.MailboxPreview
+    end
+  end
 end

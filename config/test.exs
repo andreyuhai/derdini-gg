@@ -20,3 +20,5 @@ config :dert_gg_web, DertGGWeb.Endpoint,
 
 # Print only warnings and errors during test
 config :logger, level: :warn
+
+config :dert_gg_web, DertGGWeb.Mailer, adapter: Swoosh.Adapters.Test
