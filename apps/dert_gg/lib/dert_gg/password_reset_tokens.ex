@@ -3,7 +3,7 @@ defmodule DertGG.PasswordResetTokens do
   alias DertGG.PasswordResetTokens.PasswordResetToken
   alias DertGG.Repo
 
-  def create_password_reset_token(%{"email" => email}) do
+  def create_password_reset_token(email) do
     case Accounts.get_by_email(email) do
       nil ->
         {:error, :account_not_found}

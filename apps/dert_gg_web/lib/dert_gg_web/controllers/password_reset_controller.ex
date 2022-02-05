@@ -9,14 +9,15 @@ defmodule DertGGWeb.PasswordResetController do
     render(conn, :new, action: Routes.password_reset_path(conn, :create))
   end
 
-  def create(conn, params) do
-    case PasswordResetTokens.create_password_reset_token(params) do
+  def create(conn, %{"email" => email}) do
+    case PasswordResetTokens.create_password_reset_token(email) do
       {:ok, reset_token} ->
-        # Here send the email
-        IO.inspect(reset_token)
+        email
+        |> DertGGWeb.Mails.PasswordResetMail.new(reset_token.reset_token)
+        |> DertGGWeb.Mailer.deliver!()
 
       {:error, _} ->
-        # Here do nothing
+        # Here capture with Sentry
         :ok
     end
 
