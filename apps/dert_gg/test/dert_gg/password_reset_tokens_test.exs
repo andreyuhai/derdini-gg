@@ -10,14 +10,12 @@ defmodule DertGG.PasswordResetTokensTest do
       account = DertGG.Factory.insert(:account)
 
       assert {:ok, %PasswordResetToken{}} =
-               PasswordResetTokens.create_password_reset_token(%{"email" => account.email})
+               PasswordResetTokens.create_password_reset_token(account.email)
     end
 
     test "returns error tuple if the account doesn't exist" do
       assert {:error, :account_not_found} =
-               PasswordResetTokens.create_password_reset_token(%{
-                 "email" => "non-existing@email.com"
-               })
+               PasswordResetTokens.create_password_reset_token("non-existing@email.com")
     end
   end
 
