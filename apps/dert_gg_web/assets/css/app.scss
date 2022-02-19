@@ -1,31 +1,5 @@
 /* This file is for your main application css. */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-@tailwind screens;
-
-@layer base {
-  @font-face {
-    font-family: Poppins;
-    font-weight: 400;
-    src: url(/fonts/poppins/Poppins-Regular.ttf) format("truetype");
-  }
-  @font-face {
-    font-family: Poppins;
-    font-weight: 600;
-    src: url(/fonts/poppins/Poppins-SemiBold.ttf) format("truetype");
-  }
-  @font-face {
-    font-family: Poppins;
-    font-weight: 700;
-    src: url(/fonts/poppins/Poppins-Bold.ttf) format("truetype");
-  }
-  @font-face {
-    font-family: Poppins;
-    font-weight: 800;
-    src: url(/fonts/poppins/Poppins-ExtraBold.ttf) format("truetype");
-  }
-}
+@import '../node_modules/bootstrap/scss/bootstrap';
 
 /* Alerts and form errors */
 .alert {
