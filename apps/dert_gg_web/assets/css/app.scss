@@ -78,7 +78,6 @@ $font-family-base: 'Poppins', sans-serif;
 .invalid-feedback {
   color: #a94442;
   display: block;
-  margin: -1rem 0 2rem;
 }
 
 html, body {
@@ -155,4 +154,18 @@ table {
 
 .modal {
   background: rgba(126, 126, 126, 0.3);
+}
+
+.form-group {
+  margin-top: 3px;
+}
+
+.form-modal {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: $primary;
 }
