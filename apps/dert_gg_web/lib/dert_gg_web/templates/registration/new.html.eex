@@ -1,27 +1,34 @@
-<div class="row">
-  <div class="column column-50 column-offset-25">
-    <h1>Sign up</h1>
+<div class="row justify-content-md-center">
+  <div class="col col-lg-4 col-md-12 form-modal">
+    <h4>Sign up</h4>
+
     <%= form_for @changeset, @action, [as: :account], fn f -> %>
-      <%= label f, :email, "Email address" %>
-      <%= email_input f, :email %>
-      <%= error_tag f, :email %>
+      <div class="form-group">
+        <%= label f, :email, "Email address" %>
+        <%= email_input f, :email, class: "form-control" %>
+        <%= error_tag f, :email %>
+      </div>
 
 
-      <%= label f, :password, "Password" %>
-      <%= password_input f, :password %>
-      <%= error_tag f, :password %>
+      <div class="form-group">
+        <%= label f, :password, "Password" %>
+        <%= password_input f, :password, class: "form-control" %>
+        <%= error_tag f, :password %>
+      </div>
 
-      <%= label f, :password_confirmation, "Password Confirmation" %>
-      <%= password_input f, :password_confirmation %>
-      <%= error_tag f, :password_confirmation %>
+      <div class="form-group">
+        <%= label f, :password_confirmation, "Password Confirmation" %>
+        <%= password_input f, :password_confirmation, class: "form-control" %>
+        <%= error_tag f, :password_confirmation %>
+      </div>
 
-      <%= submit "Register", class: "button button-primary" %>
+      <%= submit "Register", class: "btn btn-primary mt-3" %>
     <% end %>
   </div>
 </div>
 
-<div class="row">
-  <div class="column column-50 column-offset-25">
+<div class="row justify-content-md-center mt-3">
+  <div class="col col-lg-4 col-md-12">
     <p>
       Already have an account?
       <%= link("Log in here", to: Routes.session_path(@conn, :new)) %>
