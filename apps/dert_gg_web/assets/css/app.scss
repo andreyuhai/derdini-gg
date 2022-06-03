@@ -89,10 +89,6 @@ body {
   background-color: $secondary;
 }
 
-nav {
-  background-color: $secondary;
-}
-
 table {
   border-spacing: 0 0.4rem;
   border-collapse: separate;
@@ -121,10 +117,6 @@ table {
       }
     }
   }
-}
-
-.navbar-dark .navbar-nav .nav-link{
-  color: white;
 }
 
 .navbar-brand {
@@ -168,4 +160,15 @@ table {
 
 h1, h2, h3, h4, h5, h6 {
   color: $primary;
+}
+
+.navbar-dark {
+  .navbar-nav {
+    .nav-link {
+      color: white;
+    }
+    .nav-link.active {
+      color:  $primary;
+    }
+  }
 }
