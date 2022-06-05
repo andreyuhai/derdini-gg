@@ -44,6 +44,7 @@ defmodule DertGGWeb.MixProject do
       {:guardian, "~> 2.2"},
       {:jason, "~> 1.0"},
       {:phoenix, "~> 1.6"},
+      {:phoenix_active_link, "~> 0.3.2"},
       {:phoenix_ecto, "~> 4.4"},
       {:phoenix_html, "~> 3.1"},
       {:phoenix_live_dashboard, "~> 0.4"},
