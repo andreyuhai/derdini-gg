@@ -35,6 +35,7 @@ defmodule DertGGWeb.Router do
     end
 
     live "/", DertsLive
+    live "/:entry_id", DertsLive
 
     resources "/login", SessionController, only: [:new, :create]
     resources "/password-reset", PasswordResetController, only: [:new, :create, :update, :edit]
