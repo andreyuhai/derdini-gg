@@ -9,10 +9,10 @@ $font-family-base: 'Poppins', sans-serif;
 .navbar-dark {
   .navbar-nav {
     .nav-link {
-      color: white !important;
+      color: white;
     }
     .nav-link.active {
-      color:  $primary !important;
+      color:  $primary;
     }
   }
 }
