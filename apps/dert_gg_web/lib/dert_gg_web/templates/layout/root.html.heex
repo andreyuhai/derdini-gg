@@ -21,15 +21,15 @@
 
           <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-              <li><%= link("Top 10", to: Routes.live_path(@conn, DertGGWeb.DertsLive), class: "nav-link") %></li>
+              <%= active_link(@conn, "Top 10", to: Routes.live_path(@conn, DertGGWeb.DertsLive), class: "nav-link", wrap_tag: :li) %>
             </ul>
 
             <ul class="navbar-nav mr-auto">
               <%= if @conn.assigns[:current_account] do %>
-                <li><%= link("Logout", to: Routes.session_path(@conn, :delete), method: :delete, class: "nav-link") %></li>
+                <%= active_link(@conn, "Logout", to: Routes.session_path(@conn, :delete), method: :delete, class: "nav-link", wrap_tag: :li) %>
               <% else %>
-                <li class="nav-item"><%= link("Login", to: Routes.session_path(@conn, :new), class: "nav-link") %></li>
-                <li class="nav-item"><%= link("Sign up", to: Routes.registration_path(@conn, :new), class: "nav-link") %></li>
+                <%= active_link(@conn, "Login", to: Routes.session_path(@conn, :new), class: "nav-link", wrap_tag: :li) %>
+                <%= active_link(@conn, "Sign up", to: Routes.registration_path(@conn, :new), class: "nav-link", wrap_tag: :li) %>
               <% end %>
             </ul>
           </div>
