@@ -1,9 +1,21 @@
 /* This file is for your main application css. */
+
 $primary: #161F6D;
 $secondary: #00ABE1;
 $font-family-base: 'Poppins', sans-serif;
 
 @import '../node_modules/bootstrap/scss/bootstrap';
+
+.navbar-dark {
+  .navbar-nav {
+    .nav-link {
+      color: white !important;
+    }
+    .nav-link.active {
+      color:  $primary !important;
+    }
+  }
+}
 
 @font-face {
   font-family: 'Poppins';
@@ -160,15 +172,4 @@ table {
 
 h1, h2, h3, h4, h5, h6 {
   color: $primary;
-}
-
-.navbar-dark {
-  .navbar-nav {
-    .nav-link {
-      color: white;
-    }
-    .nav-link.active {
-      color:  $primary;
-    }
-  }
 }
