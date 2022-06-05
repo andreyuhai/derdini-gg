@@ -15,20 +15,21 @@
         <div class="container">
           <a href="/" class="navbar-brand">Dert GG</a>
 
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="true" aria-label="Toggle navigation">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="true" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
 
           <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-              <li class="nav-item active"><%= link("Top 10", to: Routes.session_path(@conn, :new), class: "nav-link active")%></li>
+              <li><%= link("Top 10", to: Routes.live_path(@conn, DertGGWeb.DertsLive), class: "nav-link") %></li>
             </ul>
 
             <ul class="navbar-nav mr-auto">
               <%= if @conn.assigns[:current_account] do %>
-                <li class="nav-item"><%= link("Logout", to: Routes.session_path(@conn, :delete), method: :delete, class: "nav-link")%></li>
+                <li><%= link("Logout", to: Routes.session_path(@conn, :delete), method: :delete, class: "nav-link") %></li>
               <% else %>
-                <li class="nav-item"><%= link("Login", to: Routes.session_path(@conn, :new), class: "nav-link")%></li>
+                <li class="nav-item"><%= link("Login", to: Routes.session_path(@conn, :new), class: "nav-link") %></li>
+                <li class="nav-item"><%= link("Sign up", to: Routes.registration_path(@conn, :new), class: "nav-link") %></li>
               <% end %>
             </ul>
           </div>
