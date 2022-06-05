@@ -83,6 +83,9 @@ defmodule DertGGWeb do
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
+      # Active link for marking nav items as active
+      import PhoenixActiveLink
+
       # Import LiveView helpers (live_render, live_component, live_patch, etc)
       import Phoenix.LiveView.Helpers
 
