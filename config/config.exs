@@ -36,6 +36,12 @@ config :dert_gg_web, DertGGWeb.Mailer,
   adapter: Swoosh.Adapters.Sendinblue,
   api_key: System.get_env("SENDINBLUE_API_KEY")
 
+# Sentry config
+config :sentry,
+  dsn: System.fetch_env!("SENTRY_DSN"),
+  enable_source_code_context: true,
+  root_source_code_path: File.cwd!()
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"

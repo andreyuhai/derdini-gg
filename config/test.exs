@@ -22,3 +22,7 @@ config :dert_gg_web, DertGGWeb.Endpoint,
 config :logger, level: :warn
 
 config :dert_gg_web, DertGGWeb.Mailer, adapter: Swoosh.Adapters.Test
+
+config :sentry,
+  environment_name: :test,
+  send_result: :sync

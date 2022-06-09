@@ -76,3 +76,6 @@ config :phoenix, :plug_init_mode, :runtime
 config :phoenix, :stacktrace_depth, 20
 
 config :dert_gg_web, DertGGWeb.Mailer, adapter: Swoosh.Adapters.Local
+
+config :sentry,
+  environment_name: :dev
