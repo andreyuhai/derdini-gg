@@ -78,4 +78,5 @@ config :phoenix, :stacktrace_depth, 20
 config :dert_gg_web, DertGGWeb.Mailer, adapter: Swoosh.Adapters.Local
 
 config :sentry,
+  dsn: System.fetch_env!("SENTRY_DSN"),
   environment_name: :dev
