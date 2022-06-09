@@ -12,9 +12,10 @@ jobs:
     name: Build and test
     runs-on: ubuntu-latest
     env:
-      PSQL_USERNAME: postgres
-      PSQL_PASSWORD: postgres
       GUARDIAN_SECRET_KEY: TZknztVBV2TvDxlxKShPzVtguTAOva1PqEDcpKc0vYZzhvojR2FD2+7tIEhXU3bW
+      PSQL_PASSWORD: postgres
+      PSQL_USERNAME: postgres
+      SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
 
     # Service containers to run with
     services:
