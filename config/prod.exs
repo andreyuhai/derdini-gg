@@ -50,9 +50,6 @@ config :dert_gg_web, DertGGWeb.Endpoint,
 # Do not print debug messages in production
 config :logger, level: :info
 
-config :sentry,
-  dsn: System.fetch_env!("SENTRY_DSN")
-
 # Finally import the config/prod.secret.exs which loads secrets
 # and configuration from environment variables.
 import_config "prod.secret.exs"

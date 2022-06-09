@@ -38,6 +38,7 @@ config :dert_gg_web, DertGGWeb.Mailer,
 
 # Sentry config
 config :sentry,
+  dsn: System.fetch_env!("SENTRY_DSN"),
   enable_source_code_context: true,
   root_source_code_path: File.cwd!()
 
