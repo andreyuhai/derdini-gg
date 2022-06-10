@@ -1,18 +1,20 @@
-<table class="table table-borderless table-hover">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Entry</th>
-      <th scope="col">Yazar</th>
-      <th scope="col">GG</th>
-    </tr>
-  </thead>
-  <tbody>
-    <%= for {%{entry: entry, vote_count: vote_count}, index} <- Enum.with_index(@entries, 1) do %>
-      <.row entry={entry} vote_count={vote_count} num={index} />
-    <% end %>
-  </tbody>
-</table>
+<div class="table-responsive">
+  <table class="table table-borderless table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Entry</th>
+        <th scope="col">Yazar</th>
+        <th scope="col">GG</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= for {%{entry: entry, vote_count: vote_count}, index} <- Enum.with_index(@entries, 1) do %>
+        <.row entry={entry} vote_count={vote_count} num={index} />
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
 <%= if @show_modal do%>
   <.live_component module={DertGGWeb.LiveComponent.ModalComponent} id="hero" entry={@entry} />
