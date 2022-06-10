@@ -11,7 +11,7 @@ defmodule DertGGWeb.LiveComponent.ModalComponent do
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" phx-click="close-modal"></button>
           </div>
           <div class="modal-body">
-            <%= @entry.text_content %>
+            <%= @entry.html_content |> HtmlSanitizeEx.basic_html() |> raw() %>
           </div>
           <div class="modal-footer">
             <a href={"https://eksisozluk.com/entry/#{@entry.entry_id}"} target="_blank"><%= @entry.author %></a>

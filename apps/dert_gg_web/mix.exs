@@ -43,6 +43,7 @@ defmodule DertGGWeb.MixProject do
       {:gettext, "~> 0.11"},
       {:guardian, "~> 2.2"},
       {:hackney, "~> 1.18"},
+      {:html_sanitize_ex, "~> 1.4"},
       {:jason, "~> 1.0"},
       {:phoenix, "~> 1.6"},
       {:phoenix_active_link, "~> 0.3.2"},
