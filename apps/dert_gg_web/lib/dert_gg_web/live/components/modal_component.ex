@@ -4,7 +4,7 @@ defmodule DertGGWeb.LiveComponent.ModalComponent do
   def render(assigns) do
     ~H"""
     <div class="modal fade show" style="display: block;" tabindex="-1" phx-click="close-modal">
-      <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
         <div class="modal-content" phx-click="">
           <div class="modal-header">
             <h5 class="modal-title">Entry</h5>
