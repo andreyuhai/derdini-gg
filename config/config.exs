@@ -27,8 +27,8 @@ config :logger, :console,
 config :phoenix, :json_library, Jason
 
 # Guardian config
-config :dert_gg_web, DertGGWeb.Authentication,
-  issuer: "dert_gg_web",
+config :dert_gg, DertGG.Authentication,
+  issuer: "dert_gg",
   secret_key: System.get_env("GUARDIAN_SECRET_KEY")
 
 # Swoosh config

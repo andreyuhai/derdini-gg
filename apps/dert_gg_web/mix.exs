@@ -41,7 +41,6 @@ defmodule DertGGWeb.MixProject do
       {:corsica, "~> 1.1"},
       {:dert_gg, in_umbrella: true},
       {:gettext, "~> 0.11"},
-      {:guardian, "~> 2.2"},
       {:hackney, "~> 1.18"},
       {:html_sanitize_ex, "~> 1.4"},
       {:jason, "~> 1.0"},

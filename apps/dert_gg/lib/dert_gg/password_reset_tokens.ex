@@ -1,7 +1,9 @@
 defmodule DertGG.PasswordResetTokens do
-  alias DertGG.Accounts
-  alias DertGG.PasswordResetTokens.PasswordResetToken
-  alias DertGG.Repo
+  alias DertGG.{
+    Accounts,
+    PasswordResetTokens.PasswordResetToken,
+    Repo
+  }
 
   def create_password_reset_token(email) do
     case Accounts.get_by_email(email) do
@@ -10,7 +12,7 @@ defmodule DertGG.PasswordResetTokens do
 
       account ->
         {:ok, reset_token, _} =
-          DertGGWeb.Authentication.encode_and_sign(account, %{}, ttl: {30, :minutes})
+          DertGG.Authentication.encode_and_sign(account, %{}, ttl: {30, :minutes})
 
         %PasswordResetToken{}
         |> PasswordResetToken.changeset(%{

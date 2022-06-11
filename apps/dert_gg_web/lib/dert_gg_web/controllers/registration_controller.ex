@@ -2,7 +2,7 @@ defmodule DertGGWeb.RegistrationController do
   use DertGGWeb, :controller
 
   alias DertGG.Accounts
-  alias DertGGWeb.Authentication
+  alias DertGG.Authentication
 
   def new(conn, _) do
     if Authentication.get_current_account(conn) do

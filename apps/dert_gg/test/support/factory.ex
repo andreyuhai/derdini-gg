@@ -54,7 +54,7 @@ defmodule DertGG.Factory do
         insert(:account)
       end)
 
-    {:ok, reset_token, _} = DertGGWeb.Authentication.encode_and_sign(account)
+    {:ok, reset_token, _} = DertGG.Authentication.encode_and_sign(account)
 
     %PasswordResetToken{
       account: build(:account),

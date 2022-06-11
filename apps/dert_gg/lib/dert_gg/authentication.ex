@@ -1,5 +1,5 @@
-defmodule DertGGWeb.Authentication do
-  use Guardian, otp_app: :dert_gg_web
+defmodule DertGG.Authentication do
+  use Guardian, otp_app: :dert_gg
 
   alias DertGG.{Accounts, Accounts.Account}
 
