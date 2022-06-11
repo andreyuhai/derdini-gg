@@ -1,10 +1,13 @@
 defmodule DertGGWeb.Api.VoteController do
   use DertGGWeb, :controller
 
-  alias DertGG.Entries
-  alias DertGG.Votes
-  alias DertGG.Votes.Vote
-  alias DertGGWeb.Authentication
+  alias DertGG.{
+    Authentication,
+    Entries,
+    Votes,
+    Votes.Vote
+  }
+
   alias Phoenix.PubSub
 
   def create(conn, params) do

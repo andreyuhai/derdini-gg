@@ -1,9 +1,11 @@
 defmodule DertGGWeb.PasswordResetController do
   use DertGGWeb, :controller
 
-  alias DertGG.Accounts
-  alias DertGG.PasswordResetTokens
-  alias DertGGWeb.Authentication
+  alias DertGG.{
+    Accounts,
+    PasswordResetTokens,
+    Authentication
+  }
 
   def new(conn, %{}) do
     render(conn, :new, action: Routes.password_reset_path(conn, :create))

@@ -7,7 +7,7 @@ defmodule DertGGWeb.DertsLive do
 
   on_mount DertGGWeb.Live.Helpers.AuthHelper
 
-  def mount(_params, session, socket) do
+  def mount(_params, _session, socket) do
     entries = DertGG.Entries.get_top_entries()
     if connected?(socket), do: PubSub.subscribe(DertGGWeb.PubSub, "vote-updates")
 
@@ -18,7 +18,7 @@ defmodule DertGGWeb.DertsLive do
     {:noreply, assign(socket, :entries, entries)}
   end
 
-  def handle_event("close-modal", %{} = params, socket) do
+  def handle_event("close-modal", %{} = _params, socket) do
     {:noreply, push_patch(socket, to: "/", show_modal: false)}
   end
 
@@ -26,7 +26,7 @@ defmodule DertGGWeb.DertsLive do
     {:noreply, push_patch(socket, to: "/#{params["entry"]}", show_modal: true)}
   end
 
-  def handle_params(%{"entry_id" => entry_id}, uri, socket) do
+  def handle_params(%{"entry_id" => entry_id}, _uri, socket) do
     with {entry_id, _binary} <- Integer.parse(entry_id),
          {:ok, entry} <- find_entry(socket.assigns.entries, entry_id) do
       {:noreply, assign(socket, show_modal: true, entry: entry)}

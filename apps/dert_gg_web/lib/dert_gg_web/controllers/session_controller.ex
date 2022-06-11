@@ -1,8 +1,10 @@
 defmodule DertGGWeb.SessionController do
   use DertGGWeb, :controller
 
-  alias DertGG.Accounts
-  alias DertGGWeb.Authentication
+  alias DertGG.{
+    Accounts,
+    Authentication
+  }
 
   def new(conn, _) do
     if Authentication.get_current_account(conn) do
