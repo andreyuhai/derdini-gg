@@ -26,22 +26,10 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
-# Guardian config
-config :dert_gg, DertGG.Authentication,
-  issuer: "dert_gg",
-  secret_key: System.get_env("GUARDIAN_SECRET_KEY")
-
 # Swoosh config
 config :dert_gg_web, DertGGWeb.Mailer,
   adapter: Swoosh.Adapters.Sendinblue,
   api_key: System.get_env("SENDINBLUE_API_KEY")
-
-# Sentry config
-config :sentry,
-  dsn: System.fetch_env!("SENTRY_DSN"),
-  enable_source_code_context: true,
-  root_source_code_path: File.cwd!(),
-  included_environments: [:prod, :test, :dev]
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
