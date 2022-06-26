@@ -1,6 +1,6 @@
 FROM elixir:1.13.4-alpine AS build
 
-RUN apk add --no-cache build-base npm git
+RUN apk add --no-cache build-base npm git python3
 
 # prepare build dir
 WORKDIR /app
@@ -35,6 +35,7 @@ COPY apps/dert_gg_web/lib apps/dert_gg_web/lib
 COPY apps/dert_gg_web/assets apps/dert_gg_web/assets
 
 # Deploy & Digest assets
+RUN npm --prefix ./apps/dert_gg_web/assets ci --progress=false --no-audit --loglevel=error && \
 RUN npm run --prefix ./apps/dert_gg_web/assets deploy
 RUN mix phx.digest
 
