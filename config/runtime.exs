@@ -7,6 +7,15 @@ import Config
 # any compile-time configuration in here, as it won't be applied.
 # The block below contains prod specific runtime configuration.
 if config_env() == :prod do
+  # ---------- Staging CONFIG ---------
+  if System.fetch_env!("ENVIRONMENT") == "staging" do
+    config :argon2_elixir,
+      t_cost: 16,
+      m_cost: 15
+  end
+
+  # ---------- Staging CONFIG ---------
+
   database_url =
     System.get_env("DATABASE_URL") ||
       raise """
