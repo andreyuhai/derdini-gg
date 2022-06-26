@@ -7,6 +7,7 @@ defmodule DertGG.Umbrella.MixProject do
       version: "0.1.0",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
+      elixir: "~> 1.13",
       aliases: aliases(),
       releases: [
         dert_gg_web: [
