@@ -36,7 +36,7 @@ COPY apps/dert_gg_web/assets apps/dert_gg_web/assets
 
 # Deploy & Digest assets
 RUN npm --prefix ./apps/dert_gg_web/assets ci --progress=false --no-audit --loglevel=error && \
-RUN npm run --prefix ./apps/dert_gg_web/assets deploy
+    npm run --prefix ./apps/dert_gg_web/assets deploy
 RUN mix phx.digest
 
 # Compile the release
