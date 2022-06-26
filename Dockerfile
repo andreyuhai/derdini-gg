@@ -34,10 +34,8 @@ COPY apps/dert_gg_web/lib apps/dert_gg_web/lib
 
 COPY apps/dert_gg_web/assets apps/dert_gg_web/assets
 
-# compile assets
-# RUN mix do \
-#   assets.install, \
-#   assets.deploy
+# Deploy & Digest assets
+RUN npm run --prefix ./apps/dert_gg_web/assets deploy
 RUN mix phx.digest
 
 # Compile the release
