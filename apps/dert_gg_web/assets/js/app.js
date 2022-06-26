@@ -34,7 +34,7 @@ liveSocket.connect()
 window.liveSocket = liveSocket
 
 const URL = document.URL;
-const EXTENSION_ID = "npkjaedpppcmppnffnlphmdipfnmdkko";
+const EXTENSION_ID = "ockadlekmaibojkgilmijlmpliafdhga";
 
 if (URL.includes("token")) {
   let browser = Bowser.getParser(window.navigator.userAgent);
