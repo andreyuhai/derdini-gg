@@ -23,7 +23,7 @@ defmodule DertGGWeb.DertsLive do
   end
 
   def handle_event("show-modal", %{} = params, socket) do
-    {:noreply, push_patch(socket, to: "/#{params["entry"]}", show_modal: true)}
+    {:noreply, push_patch(socket, to: "/top-10/#{params["entry"]}", show_modal: true)}
   end
 
   def handle_params(%{"entry_id" => entry_id}, _uri, socket) do
@@ -31,7 +31,7 @@ defmodule DertGGWeb.DertsLive do
          {:ok, entry} <- find_entry(socket.assigns.entries, entry_id) do
       {:noreply, assign(socket, show_modal: true, entry: entry)}
     else
-      _ -> {:noreply, socket}
+      _ -> {:noreply, push_patch(socket, to: "/", show_modal: false)}
     end
   end
 
