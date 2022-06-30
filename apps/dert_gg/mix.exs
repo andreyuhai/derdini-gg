@@ -23,7 +23,7 @@ defmodule DertGG.MixProject do
   def application do
     [
       mod: {DertGG.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :prometheus_ecto]
     ]
   end
 
@@ -42,7 +42,8 @@ defmodule DertGG.MixProject do
       {:guardian, "~> 2.2"},
       {:jason, "~> 1.0"},
       {:phoenix_pubsub, "~> 2.0"},
-      {:postgrex, ">= 0.0.0"}
+      {:postgrex, ">= 0.0.0"},
+      {:prometheus_ecto, "~> 1.4"}
     ]
   end
 
