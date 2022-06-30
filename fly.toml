@@ -44,5 +44,9 @@ processes = []
     restart_limit = 0
     timeout = "2s"
 
+[metrics]
+  port = 9091
+  path = "/metrics"
+
 [deploy]
   release_command =  "/app/bin/migrate"
