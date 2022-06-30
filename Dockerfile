@@ -61,8 +61,6 @@ USER nobody:nobody
 
 COPY --from=build --chown=nobody:nobody /app/_build/prod/rel/dert_gg_web ./
 
-ENV ECTO_IPV6=true
-ENV ERL_AFLAGS="-proto_dist inet6_tcp"
 ENV HOME=/app
 
 CMD ["bin/server"]
