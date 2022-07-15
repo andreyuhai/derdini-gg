@@ -26,10 +26,10 @@
 
             <ul class="navbar-nav mr-auto">
               <%= if @conn.assigns[:current_account] do %>
-                <%= active_link(@conn, "Logout", to: Routes.session_path(@conn, :delete), method: :delete, class: "nav-link", wrap_tag: :li) %>
+                <%= active_link(@conn, "Çıkış yap", to: Routes.session_path(@conn, :delete), method: :delete, class: "nav-link", wrap_tag: :li) %>
               <% else %>
-                <%= active_link(@conn, "Login", to: Routes.session_path(@conn, :new), class: "nav-link", wrap_tag: :li) %>
-                <%= active_link(@conn, "Sign up", to: Routes.registration_path(@conn, :new), class: "nav-link", wrap_tag: :li) %>
+                <%= active_link(@conn, "Üye ol", to: Routes.registration_path(@conn, :new), class: "nav-link", wrap_tag: :li) %>
+                <%= active_link(@conn, "Giriş yap", to: Routes.session_path(@conn, :new), class: "nav-link", wrap_tag: :li) %>
               <% end %>
             </ul>
           </div>
