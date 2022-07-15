@@ -3,8 +3,8 @@ defmodule DertGGWeb.Components.Row do
 
   def row(assigns) do
     ~H"""
-    <tr class="table-hover" phx-click="show-modal" phx-value-entry={@entry.id}>
-      <td scope="row"><%= @num %></td>
+    <tr class="table-hover" phx-click="show-modal" phx-value-entry-index={@entry_index}>
+      <td scope="row"><%= @entry_index %></td>
       <td><div class="entry-content"><%= @entry.text_content %></div></td>
       <td><%= @vote_count %></td>
     </tr>

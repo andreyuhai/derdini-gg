@@ -18,17 +18,17 @@ defmodule DertGGWeb.DertsLive do
     {:noreply, assign(socket, :entries, entries)}
   end
 
-  def handle_event("close-modal", %{} = _params, socket) do
+  def handle_event("close-modal", _params, socket) do
     {:noreply, push_patch(socket, to: "/", show_modal: false)}
   end
 
-  def handle_event("show-modal", %{} = params, socket) do
-    {:noreply, push_patch(socket, to: "/top-10/#{params["entry"]}", show_modal: true)}
+  def handle_event("show-modal", %{"entry-index" => entry_index}, socket) do
+    {:noreply, push_patch(socket, to: "/top-10/#{entry_index}", show_modal: true)}
   end
 
-  def handle_params(%{"entry_id" => entry_id}, _uri, socket) do
-    with {entry_id, _binary} <- Integer.parse(entry_id),
-         {:ok, entry} <- find_entry(socket.assigns.entries, entry_id) do
+  def handle_params(%{"entry_index" => entry_index}, _uri, socket) do
+    with {entry_index, _binary} <- Integer.parse(entry_index),
+         {:ok, entry} <- find_entry(socket.assigns.entries, entry_index) do
       {:noreply, assign(socket, show_modal: true, entry: entry)}
     else
       _ -> {:noreply, push_patch(socket, to: "/", show_modal: false)}
@@ -41,10 +41,10 @@ defmodule DertGGWeb.DertsLive do
 
   # TODO: Fix this mess, use virtual field maybe for vote_count within entry
   @type entry :: %{entry: map(), vote_count: number()}
-  @spec find_entry([entry], entry_id :: number()) ::
+  @spec find_entry([entry], entry_index :: number()) ::
           {:ok, map()} | {:error, :entry_not_found}
-  defp find_entry(entries, entry_id) do
-    case Enum.find(entries, &(&1.entry.id == entry_id)) do
+  defp find_entry(entries, entry_index) do
+    case Enum.at(entries, entry_index - 1) do
       nil -> {:error, :entry_not_found}
       entry -> {:ok, entry.entry}
     end
