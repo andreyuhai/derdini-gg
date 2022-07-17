@@ -24,7 +24,10 @@ defmodule DertGGWeb.Api.VoteController do
       end
 
       vote_count = Votes.get_count(entry_id)
-      PubSub.broadcast(DertGGWeb.PubSub, "vote-updates", %{entries: Entries.get_top_entries()})
+
+      PubSub.broadcast(DertGGWeb.PubSub, "vote-updates", %{
+        entries: Entries.get_daily_top_entries()
+      })
 
       json(conn, %{"vote-count": vote_count})
     end

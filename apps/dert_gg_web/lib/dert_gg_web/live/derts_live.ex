@@ -8,7 +8,7 @@ defmodule DertGGWeb.DertsLive do
   on_mount DertGGWeb.Live.Helpers.AuthHelper
 
   def mount(_params, _session, socket) do
-    entries = DertGG.Entries.get_top_entries()
+    entries = DertGG.Entries.get_daily_top_entries()
     if connected?(socket), do: PubSub.subscribe(DertGGWeb.PubSub, "vote-updates")
 
     {:ok, assign(socket, entries: entries, show_modal: false)}

@@ -74,7 +74,7 @@ defmodule DertGG.EntriesTest do
     end
   end
 
-  describe "get_top_entries/0-1" do
+  describe "get_daily_top_entries/0-1" do
     test "returns top 10 entries by vote count by default" do
       entry1 = Factory.insert(:entry)
       Factory.insert_list(3, :vote, entry: entry1)
@@ -84,7 +84,7 @@ defmodule DertGG.EntriesTest do
 
       Factory.insert_list(9, :vote)
 
-      entries = Entries.get_top_entries()
+      entries = Entries.get_daily_top_entries()
 
       assert length(entries) == 10
 
@@ -99,10 +99,26 @@ defmodule DertGG.EntriesTest do
       entry2 = Factory.insert(:entry)
       Factory.insert_list(1, :vote, entry: entry2)
 
-      entries = Entries.get_top_entries(top: 1)
+      entries = Entries.get_daily_top_entries(top: 1)
 
       assert %{entry: entry1, vote_count: 2} in entries
       refute %{entry: entry2, vote_count: 1} in entries
+    end
+
+    test "returns only current day's votes" do
+      datetime_yesterday = DateTime.utc_now() |> DateTime.add(-24 * 60 * 60, :second)
+
+      entry1 = Factory.insert(:entry)
+      Factory.insert_list(2, :vote, entry: entry1, inserted_at: datetime_yesterday)
+      Factory.insert(:vote, entry: entry1)
+
+      entry2 = Factory.insert(:entry)
+      Factory.insert_list(1, :vote, entry: entry2)
+
+      entries = Entries.get_daily_top_entries(top: 10)
+
+      assert %{entry: entry1, vote_count: 1} in entries
+      assert %{entry: entry2, vote_count: 1} in entries
     end
   end
 end

@@ -26,14 +26,15 @@ defmodule DertGG.Entries do
 
   def get_entries(), do: Repo.all(from e in Entry, preload: [:votes])
 
-  def get_top_entries(opts \\ [top: 10]) do
+  def get_daily_top_entries(opts \\ [top: 10]) do
     limit = Keyword.get(opts, :top)
 
-    Entry
-    |> join(:inner, [e], v in assoc(e, :votes))
-    |> select([e], %{entry: e, vote_count: count(e.id)})
-    |> group_by([e], e.id)
-    |> order_by([e], desc: count(e.id), desc: e.inserted_at)
+    DertGG.Votes.Vote
+    |> join(:inner, [v], e in assoc(v, :entry))
+    |> where([v], fragment("date(?) = current_date", v.inserted_at))
+    |> select([v, e], %{entry: e, vote_count: count(v.id)})
+    |> group_by([v, e], e.id)
+    |> order_by([v, e], desc: count(v.id), desc: e.inserted_at)
     |> limit(^limit)
     |> Repo.all()
   end
