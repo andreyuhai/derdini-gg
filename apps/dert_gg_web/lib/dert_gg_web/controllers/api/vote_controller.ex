@@ -26,16 +26,12 @@ defmodule DertGGWeb.Api.VoteController do
       vote_count = Votes.get_count(entry_id)
       PubSub.broadcast(DertGGWeb.PubSub, "vote-updates", %{entries: Entries.get_top_entries()})
 
-      conn
-      |> json(%{
-        "vote-count": vote_count
-      })
+      json(conn, %{"vote-count": vote_count})
     end
   end
 
   defp prepare_params_for_entry(params) do
-    params
-    |> Map.new(fn {key, value} ->
+    Map.new(params, fn {key, value} ->
       key =
         key
         |> String.replace("-", "_")
