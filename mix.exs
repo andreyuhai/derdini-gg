@@ -11,6 +11,7 @@ defmodule DertGG.Umbrella.MixProject do
       aliases: aliases(),
       releases: [
         dert_gg_web: [
+          cookie: "g44OD9XZfI_Ip3lbV9WHVD75YIjHZWGzXNp7M81ANAJrq0ih0AWUqQ==",
           applications: [dert_gg_web: :permanent]
         ]
       ]
