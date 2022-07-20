@@ -44,10 +44,6 @@ if config_env() == :prod do
       You can generate one by calling: mix phx.gen.secret
       """
 
-  app_name =
-    System.get_env("FLY_APP_NAME") ||
-      raise "FLY_APP_NAME not available"
-
   host =
     System.get_env("HOST") ||
       raise "environment variable HOST is missing"
@@ -90,17 +86,17 @@ if config_env() == :prod do
   #     config :swoosh, :api_client, Swoosh.ApiClient.Hackney
   #
   # See https://hexdocs.pm/swoosh/Swoosh.html#module-installation for details.
+
+  # Guardian config
+  config :dert_gg, DertGG.Authentication,
+    issuer: "dert_gg",
+    secret_key: System.fetch_env!("GUARDIAN_SECRET_KEY")
+
+  # Sentry config
+  config :sentry,
+    dsn: System.fetch_env!("SENTRY_DSN"),
+    enable_source_code_context: true,
+    root_source_code_path: File.cwd!(),
+    included_environments: [:prod, :test, :dev],
+    tags: %{env: System.fetch_env!("ENVIRONMENT")}
 end
-
-# Guardian config
-config :dert_gg, DertGG.Authentication,
-  issuer: "dert_gg",
-  secret_key: System.fetch_env!("GUARDIAN_SECRET_KEY")
-
-# Sentry config
-config :sentry,
-  dsn: System.fetch_env!("SENTRY_DSN"),
-  enable_source_code_context: true,
-  root_source_code_path: File.cwd!(),
-  included_environments: [:prod, :test, :dev],
-  tags: %{env: System.fetch_env!("ENVIRONMENT")}

@@ -31,6 +31,11 @@ config :dert_gg_web, DertGGWeb.Mailer,
   adapter: Swoosh.Adapters.Sendinblue,
   api_key: System.get_env("SENDINBLUE_API_KEY")
 
+# Guardian config
+config :dert_gg, DertGG.Authentication,
+  issuer: "dert_gg",
+  secret_key: "ALKcalOyGo6rrF0hqzm1vhbUvcnXktyrcwUP+bKp7415hmX7jMrDzAOUoDWB1Qox"
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{config_env()}.exs"
