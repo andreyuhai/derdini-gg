@@ -102,4 +102,5 @@ config :sentry,
   dsn: System.fetch_env!("SENTRY_DSN"),
   enable_source_code_context: true,
   root_source_code_path: File.cwd!(),
-  included_environments: [:prod, :test, :dev]
+  included_environments: [:prod, :test, :dev],
+  tags: %{env: System.fetch_env!("ENVIRONMENT")}
