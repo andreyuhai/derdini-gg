@@ -25,6 +25,7 @@
             </ul>
 
             <ul class="navbar-nav mr-auto">
+                <%= active_link(@conn, "SSS", to: "https://rightful-sapphire-316.notion.site/dert-gg-bae0dc46b5c9489f809785150b351e78", class: "nav-link", target: "_blank", wrap_tag: :li) %>
               <%= if @conn.assigns[:current_account] do %>
                 <%= active_link(@conn, "Çıkış yap", to: Routes.session_path(@conn, :delete), method: :delete, class: "nav-link", wrap_tag: :li) %>
               <% else %>
