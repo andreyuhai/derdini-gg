@@ -8,35 +8,9 @@
     <link rel="stylesheet" href={Routes.static_path(@conn, "/css/app.css")}/>
     <%= csrf_meta_tag() %>
     <script defer type="text/javascript" src={Routes.static_path(@conn, "/js/app.js")}></script>
+    <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body>
-    <header>
-      <nav role="navigation" class="navbar navbar-expand-lg navbar-dark">
-        <div class="container">
-          <a href="/" class="navbar-brand">dert.gg</a>
-
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="true" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-
-          <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-              <%= active_link(@conn, "Top 10", to: Routes.live_path(@conn, DertGGWeb.DertsLive), class: "nav-link", wrap_tag: :li) %>
-            </ul>
-
-            <ul class="navbar-nav mr-auto">
-                <%= active_link(@conn, "SSS", to: "https://rightful-sapphire-316.notion.site/dert-gg-bae0dc46b5c9489f809785150b351e78", class: "nav-link", target: "_blank", wrap_tag: :li) %>
-              <%= if @conn.assigns[:current_account] do %>
-                <%= active_link(@conn, "Çıkış yap", to: Routes.session_path(@conn, :delete), method: :delete, class: "nav-link", wrap_tag: :li) %>
-              <% else %>
-                <%= active_link(@conn, "Üye ol", to: Routes.registration_path(@conn, :new), class: "nav-link", wrap_tag: :li) %>
-                <%= active_link(@conn, "Giriş yap", to: Routes.session_path(@conn, :new), class: "nav-link", wrap_tag: :li) %>
-              <% end %>
-            </ul>
-          </div>
-        </div>
-      </nav>
-    </header>
     <%= @inner_content %>
   </body>
 </html>
