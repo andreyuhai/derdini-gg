@@ -1,6 +1,7 @@
 FROM elixir:1.13.4-alpine AS build
 
-RUN apk add --no-cache build-base npm git python3
+RUN apk update && apk upgrade
+RUN apk add --no-cache build-base git python3 nodejs npm
 
 # prepare build dir
 WORKDIR /app
